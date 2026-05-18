@@ -9,6 +9,7 @@ import { Button, Spinner } from "@heroui/react";
 import Image from "next/image";
 import ProfileDropdown from "./ProfileDropdown";
 import { IoLogInOutline } from "react-icons/io5";
+import ThemeSwitch from "./ThemeSwitch";
 
 // import { useRouter } from "next/navigation";
 const navItems = [
@@ -82,6 +83,7 @@ const Navbar = () => {
         </ul>
         {/* login & logout */}
         <div className="flex items-center gap-3">
+          <ThemeSwitch/>
           {isPending ? (
             <div className="flex flex-col items-center">
               <Spinner color="success" size="sm" />
