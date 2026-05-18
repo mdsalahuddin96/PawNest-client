@@ -208,20 +208,9 @@ body {
   box-shadow: var(--shadow-sm);
   transition: all 0.35s ease;
 }
-
 .pet-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
-}
-
-.pet-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: var(--gradient-primary);
 }
 
 .pet-card-image {
@@ -229,20 +218,17 @@ body {
 }
 
 .pet-card-body {
-  @apply p-6 space-y-4;
+  @apply p-6 space-y-1;
 }
 
 .pet-card-title {
   @apply text-2xl font-bold;
-
   font-family: "Fredoka", sans-serif;
-
   color: var(--text-primary);
 }
 
 .pet-card-text {
   color: var(--text-secondary);
-
   @apply leading-relaxed;
 }
 
