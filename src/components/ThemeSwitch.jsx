@@ -2,16 +2,22 @@
 
 // import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { BiMoon, BiSun } from "react-icons/bi";
 
 export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme();
-
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  // Avoid hydration mismatch
+  if (!mounted) {
+    return <div className="h-11 w-11 rounded-full bg-transparent" />;
+  }
   return (
     <button
-      onClick={() =>
-        setTheme(theme === "dark" ? "light" : "dark")
-      }
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className="
         flex
         h-11

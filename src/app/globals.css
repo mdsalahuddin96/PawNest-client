@@ -359,24 +359,6 @@ body {
   background: var(--gradient-primary);
 }
 
-/* ======================================================
-    HERO BACKGROUND
-====================================================== */
-
-.hero-bg {
-  background:
-    radial-gradient(
-      circle at top left,
-      rgba(255, 122, 89, 0.18),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at bottom right,
-      rgba(78, 205, 196, 0.18),
-      transparent 30%
-    ),
-    var(--background);
-}
 
 /* ======================================================
     BEAUTIFUL SCROLLBAR
