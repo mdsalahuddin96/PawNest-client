@@ -5,13 +5,12 @@ import { BsPerson } from "react-icons/bs";
 import NavLink from "./NavLink";
 import logo from "@/assets/logo4.png";
 // import { signOut, useSession } from "@/lib/auth-client";
-import { Avatar, Button, Spinner } from "@heroui/react";
+import { Button, Spinner } from "@heroui/react";
 import Image from "next/image";
 import ProfileDropdown from "./ProfileDropdown";
+import { IoLogInOutline } from "react-icons/io5";
 
 // import { useRouter } from "next/navigation";
-// Home, All Pets, My Requests (Private), Add Pet (Private)
-
 const navItems = [
   { href: "/", text: "Home" },
   { href: "/all-pets", text: "All Pets" },
@@ -21,7 +20,7 @@ const navItems = [
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isPending = false;
-  const user = true;
+  const user = false;
   //   const { data, isPending } = useSession();
   //   const router=useRouter()
   //   const user = data?.user;
@@ -64,7 +63,13 @@ const Navbar = () => {
         </div>
         {/* logo */}
         <div className="flex gap-2 items-center">
-          <Image src={logo} alt="logo" height={50} width={50} className="rounded-full" />
+          <Image
+            src={logo}
+            alt="logo"
+            height={50}
+            width={50}
+            className="rounded-full"
+          />
           <h1 className="gradient-text heading-font text-3xl font-semibold">
             PawNest
           </h1>
@@ -83,28 +88,11 @@ const Navbar = () => {
             </div>
           ) : user ? (
             <>
-            <ProfileDropdown/>
-              {/* <Avatar>
-                <Avatar.Image alt="John Doe" src={user?.image} />
-                <Avatar.Fallback>
-                  {user?.name.charAt(0).toUpperCase()}
-                </Avatar.Fallback>
-              </Avatar> */}
-              {/* <Button
-                // onClick={handleLogout}
-                variant="danger"
-                className="rounded-none"
-              >
-                Logout{" "}
-              </Button> */}
+              <ProfileDropdown />
             </>
           ) : (
             <>
-              <div className="flex items-center gap-1.5">
-                <BsPerson /> Profile
-              </div>
-              <Link href={"/signin"}>Login</Link>
-              <Link href={"/signup"}>Sign Up</Link>
+              <Button variant="primary" className='btn-secondary'><IoLogInOutline/> Login</Button>
             </>
           )}
         </div>
