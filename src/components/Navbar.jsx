@@ -1,10 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { BsPerson } from "react-icons/bs";
 import NavLink from "./NavLink";
 import logo from "@/assets/logo4.png";
-import { signOut, useSession } from "@/lib/auth-client";
+import { useSession } from "@/lib/auth-client";
 import { Button, Spinner } from "@heroui/react";
 import Image from "next/image";
 import ProfileDropdown from "./ProfileDropdown";
@@ -80,6 +79,7 @@ const Navbar = () => {
           {isPending ? (
             <div className="flex flex-col items-center">
               <Spinner color="success" size="lg" />
+              <span className="text-primary text-sm">Loading...</span>
             </div>
           ) : user ? (
             <>

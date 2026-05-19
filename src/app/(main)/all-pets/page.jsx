@@ -3,7 +3,6 @@ import { getAllPets } from "@/service/getAllPets";
 
 const AllPetsPage = async () => {
   const pets = await getAllPets();
-  console.log(pets[0])
   return (
     <div className="container mx-auto mt-10">
       <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">

@@ -10,37 +10,11 @@ import { Button } from "@heroui/react";
 import { HiArrowUpRight } from "react-icons/hi2";
 import { IoIosCloseCircle } from "react-icons/io";
 import { AiFillCheckCircle } from "react-icons/ai";
-// {
-//   _id: '6a0b54621e115717fbd04706',
-//   name: 'Bella',
-//   species: 'Dog',
-//   breed: 'Golden Retriever',
-//   gender: 'Female',
-//   age: 2,
-//   size: 'Large',
-//   color: 'Golden',
-//   weight: '28 kg',
-//   vaccinated: true,
-//   neutered: true,
-//   healthCondition: 'Healthy',
-//   specialNeeds: false,
-//   description: 'Bella is a friendly and playful Golden Retriever who loves children and outdoor activities.',
-//   personality: [ 'Friendly', 'Playful', 'Loyal' ],
-//   goodWith: { children: true, dogs: true, cats: false },
-//   adoptionFee: 120,
-//   location: 'Dhaka, Bangladesh',
-//   status: 'Available',
-//   rescueStory: 'Bella was rescued from a roadside shelter after being abandoned by her previous owner.',
-//   image: 'https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop',
-//   owner: {
-//     name: 'Rahim Ahmed',
-//     email: 'rahim@example.com',
-//     phone: '+8801712345678'
-//   },
-//   createdAt: '2026-05-18T10:00:00Z'
-// }
+import Link from "next/link";
+
 const PetCard = ({ pet }) => {
   const {
+    _id,
     name,
     species,
     location,
@@ -96,12 +70,16 @@ const PetCard = ({ pet }) => {
         </div>
       </div>
       <div className="px-6 flex justify-between items-center mb-4">
-        <Button className="border border-gray-300 p-2 rounded-sm text-sm flex items-center gap-1">
-          View Details <HiArrowUpRight />
-        </Button>
-        <Button className="p-2 text-white text-sm rounded-full bg-gradient-to-r from-[#ff7a59] to-[#ffd166] hover:shadow-[var(--shadow-lg)]">
-          Adopt Now
-        </Button>
+        <Link href={`/petDetails/${_id}`}>
+          <Button className="border border-gray-300 p-2 rounded-sm text-sm flex items-center gap-1 cursor-pointer">
+            View Details <HiArrowUpRight />
+          </Button>
+        </Link>
+        <Link href={"/signin"}>
+          <Button className="cursor-pointer p-2 text-white text-sm rounded-full bg-gradient-to-r from-[#ff7a59] to-[#ffd166] hover:shadow-[var(--shadow-lg)]">
+            Adopt Now
+          </Button>
+        </Link>
       </div>
     </div>
   );
