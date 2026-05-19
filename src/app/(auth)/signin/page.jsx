@@ -1,5 +1,5 @@
 "use client";
-// import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   FieldError,
@@ -10,36 +10,28 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 const SigninPage = () => {
   const [passwordValue, setPasswordValue] = useState("");
   const [isShow, setIsShow] = useState(false);
 
-  // const onSubmit = async (formData) => {
-  //   const userData = Object.fromEntries(formData.entries());
-  //   const { data, error } = await authClient.signUp.email(
-  //     {
-  //       name: userData.name,
-  //       email: userData.email,
-  //       image: userData.image,
-  //       password: userData.password,
-  //     },
-  //     {
-  //       onSuccess: () => {
-  //         redirect("/signin")
-  //       },
-  //     },
-  //   );
-  //   if (error) {
-  //     toast.error(error.message);
-  //   } else {
-  //     toast.success("Signup Successful!");
-  //   }
-  // };
+  const onSubmit = async (formData) => {
+    const userData = Object.fromEntries(formData);
+    const { data, error } = await authClient.signIn.email({
+      email: userData.email,
+      password: userData.password,
+      callbackURL: "/",
+      rememberMe: true,
+    });
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Login Successful!");
+    }
+  };
   // const handleGoogleLogin = async () => {
   //   const data = await authClient.signIn.social({
   //     provider: "google",
@@ -47,18 +39,17 @@ const SigninPage = () => {
   // };
 
   return (
-    <div
-      className="relative min-h-screen overflow-hidden bg-[var(--background)] flex flex-col items-center justify-center px-4 py-10"
-    >
+    <div className="relative min-h-screen overflow-hidden bg-[var(--background)] flex flex-col items-center justify-center px-4 py-10">
       {/* HEADER */}
 
       <div className="relative z-10 text-center mb-8 space-y-2">
         <h1 className="heading-font text-4xl md:text-5xl font-bold text-[#2d3748] dark:text-white ">
-          Welcome to 
+          Welcome to
           <span className="gradient-text"> PawNest 🐾</span>
         </h1>
         <p className=" text-[var(--text-secondary)] ">
-          Reconnect with your furry friends and continue exploring adorable pets.
+          Reconnect with your furry friends and continue exploring adorable
+          pets.
         </p>
       </div>
 
@@ -66,7 +57,7 @@ const SigninPage = () => {
 
       <div className="relative z-10 w-full max-w-md overflow-hidden rounded-4xl border bg-[var(--surface)] border-[var(--border-color)] shadow-2xl backdrop-blur-2xl">
         <div className="relative p-8">
-          <Form className="flex flex-col w-full gap-4">
+          <Form action={onSubmit} className="flex flex-col w-full gap-4">
             {/* EMAIL */}
             <TextField
               className="form-field"
@@ -98,16 +89,16 @@ const SigninPage = () => {
               minLength={6}
               name="password"
               type={isShow ? "text" : "password"}
-              validate={(value) => {
-                if (value.length < 6) {
-                  return "Please use at least 6 characters";
-                }
-                if (!/^(?=.*[a-z])(?=.*[A-Z]).+$/.test(value)) {
-                  return "Password must contain at least one uppercase and one lowercase";
-                }
+              // validate={(value) => {
+              //   if (value.length < 6) {
+              //     return "Please use at least 6 characters";
+              //   }
+              //   if (!/^(?=.*[a-z])(?=.*[A-Z]).+$/.test(value)) {
+              //     return "Password must contain at least one uppercase and one lowercase";
+              //   }
 
-                return null;
-              }}
+              //   return null;
+              // }}
             >
               <Label className="mb-2 text-sm font-medium text-[var(--text-primary)]">
                 Password
@@ -133,7 +124,7 @@ const SigninPage = () => {
               )}
               <FieldError className="text-red-500 text-sm" />
             </TextField>
-           
+
             {/* BUTTONS */}
 
             <div className="flex flex-col gap-4 pt-2">

@@ -2,6 +2,7 @@ import { Fredoka, Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Providers } from "@/components/Providers";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({
   variable: "--font-inter-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           {children}
         </Providers>
+        <ToastContainer />
       </body>
     </html>
   );

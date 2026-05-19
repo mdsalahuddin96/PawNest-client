@@ -1,8 +1,7 @@
 "use client";
-// import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
-  Description,
   FieldError,
   Form,
   Input,
@@ -15,40 +14,49 @@ import { redirect } from "next/navigation";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 const SignupPage = () => {
   const [passwordValue, setPasswordValue] = useState("");
   const [confrimPassword, setConfirmPassword] = useState("");
   const [isShow, setIsShow] = useState(false);
   const [showConf, setShowConf] = useState(false);
-  // const onSubmit = async (formData) => {
-  //   const userData = Object.fromEntries(formData.entries());
-  //   const { data, error } = await authClient.signUp.email(
-  //     {
-  //       name: userData.name,
-  //       email: userData.email,
-  //       image: userData.image,
-  //       password: userData.password,
-  //     },
-  //     {
-  //       onSuccess: () => {
-  //         redirect("/signin")
-  //       },
-  //     },
-  //   );
-  //   if (error) {
-  //     toast.error(error.message);
-  //   } else {
-  //     toast.success("Signup Successful!");
-  //   }
-  // };
+    const isMatched=(passwordValue.trim().length>0 &&confrimPassword.trim().length>0)?passwordValue===confrimPassword?'matched':'not-matched':'';
+  const onSubmit = async (formData) => {
+    const userData = Object.fromEntries(formData.entries());
+    if(isMatched==='not-matched'){
+
+      return null;
+    }
+    setPasswordValue("")
+    setConfirmPassword("")
+    const { data, error } = await authClient.signUp.email(
+      {
+        name: userData.name,
+        email: userData.email,
+        image: userData.image,
+        password: userData.password,
+      },
+      {
+        onSuccess: () => {
+          redirect("/signin")
+        },
+      },
+    );
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Signup Successful!");
+    }
+    console.log("Data:",data)
+    console.log("Error:",error)
+  };
   // const handleGoogleLogin = async () => {
   //   const data = await authClient.signIn.social({
   //     provider: "google",
   //   });
   // };
 
-  const isMatched=(passwordValue.trim().length>0 &&confrimPassword.trim().length>0)?passwordValue===confrimPassword?'matched':'not-matched':'';
+
   return (
     <div
       className="relative min-h-screen overflow-hidden bg-[var(--background)] flex flex-col
@@ -73,7 +81,7 @@ const SignupPage = () => {
 
       <div className="relative z-10 w-full max-w-md overflow-hidden rounded-4xl border bg-[var(--surface)] border-[var(--border-color)] shadow-2xl backdrop-blur-2xl">
         <div className="relative p-8">
-          <Form className="flex flex-col w-full gap-4">
+          <Form action={onSubmit} className="flex flex-col w-full gap-4">
             {/* NAME */}
             <TextField
               isRequired
@@ -139,7 +147,7 @@ const SignupPage = () => {
               name="password"
               type={isShow ? "text" : "password"}
               validate={(value) => {
-                if (value.length < 6) {
+                if (value.length<6) {
                   return "Please use at least 6 characters";
                 }
                 if (!/^(?=.*[a-z])(?=.*[A-Z]).+$/.test(value)) {
