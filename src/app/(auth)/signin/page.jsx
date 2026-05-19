@@ -1,4 +1,5 @@
 "use client";
+import { SubmitButton } from "@/components/SubmitBtn";
 import { authClient } from "@/lib/auth-client";
 import {
   Button,
@@ -86,19 +87,9 @@ const SigninPage = () => {
             <TextField
               className="relative form-field"
               isRequired
-              minLength={6}
               name="password"
               type={isShow ? "text" : "password"}
-              // validate={(value) => {
-              //   if (value.length < 6) {
-              //     return "Please use at least 6 characters";
-              //   }
-              //   if (!/^(?=.*[a-z])(?=.*[A-Z]).+$/.test(value)) {
-              //     return "Password must contain at least one uppercase and one lowercase";
-              //   }
-
-              //   return null;
-              // }}
+             
             >
               <Label className="mb-2 text-sm font-medium text-[var(--text-primary)]">
                 Password
@@ -129,14 +120,7 @@ const SigninPage = () => {
 
             <div className="flex flex-col gap-4 pt-2">
               {/* SIGN UP */}
-
-              <Button
-                type="submit"
-                className="h-12 rounded-full bg-gradient-to-r from-[#ff7a59] to-[#ffd166] font-semibold text-white shadow-lg transition-all  duration-300
-              hover:-translate-y-1 hover:shadow-xl"
-              >
-                Sign In
-              </Button>
+              <SubmitButton text="Sign In"/>
 
               {/* DIVIDER */}
 

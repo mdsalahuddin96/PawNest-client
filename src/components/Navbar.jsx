@@ -4,14 +4,13 @@ import { useState } from "react";
 import { BsPerson } from "react-icons/bs";
 import NavLink from "./NavLink";
 import logo from "@/assets/logo4.png";
-// import { signOut, useSession } from "@/lib/auth-client";
+import { signOut, useSession } from "@/lib/auth-client";
 import { Button, Spinner } from "@heroui/react";
 import Image from "next/image";
 import ProfileDropdown from "./ProfileDropdown";
 import { IoLogInOutline } from "react-icons/io5";
 import ThemeSwitch from "./ThemeSwitch";
 
-// import { useRouter } from "next/navigation";
 const navItems = [
   { href: "/", text: "Home" },
   { href: "/all-pets", text: "All Pets" },
@@ -20,15 +19,9 @@ const navItems = [
 ];
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isPending = false;
-  const user = false;
-  //   const { data, isPending } = useSession();
-  //   const router=useRouter()
-  //   const user = data?.user;
-  //   const handleLogout = async () => {
-  //     await signOut();
-  //     router.refresh()
-  //   };
+  const { data, isPending } = useSession();
+  const user = data?.user;
+  
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-separator py-2 navbar-blur ">
       <header className="flex h-16 items-center justify-between px-6 container mx-auto">
@@ -86,16 +79,19 @@ const Navbar = () => {
           <ThemeSwitch />
           {isPending ? (
             <div className="flex flex-col items-center">
-              <Spinner color="success" size="sm" />
+              <Spinner color="success" size="lg" />
             </div>
           ) : user ? (
             <>
-              <ProfileDropdown />
+              <ProfileDropdown user={user}/>
             </>
           ) : (
             <>
               <Link href={"/signin"}>
-                <Button variant="primary" className="btn-secondary cursor-pointer">
+                <Button
+                  variant="primary"
+                  className="btn-secondary cursor-pointer"
+                >
                   <IoLogInOutline /> Login
                 </Button>
               </Link>

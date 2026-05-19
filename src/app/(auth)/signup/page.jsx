@@ -1,4 +1,5 @@
 "use client";
+import { SubmitButton } from "@/components/SubmitBtn";
 import { authClient } from "@/lib/auth-client";
 import {
   Button,
@@ -20,15 +21,20 @@ const SignupPage = () => {
   const [confrimPassword, setConfirmPassword] = useState("");
   const [isShow, setIsShow] = useState(false);
   const [showConf, setShowConf] = useState(false);
-    const isMatched=(passwordValue.trim().length>0 &&confrimPassword.trim().length>0)?passwordValue===confrimPassword?'matched':'not-matched':'';
+  const isMatched =
+    passwordValue.trim().length > 0 && confrimPassword.trim().length > 0
+      ? passwordValue === confrimPassword
+        ? "matched"
+        : "not-matched"
+      : "";
+
   const onSubmit = async (formData) => {
     const userData = Object.fromEntries(formData.entries());
-    if(isMatched==='not-matched'){
-
+    if (isMatched === "not-matched") {
       return null;
     }
-    setPasswordValue("")
-    setConfirmPassword("")
+    setPasswordValue("");
+    setConfirmPassword("");
     const { data, error } = await authClient.signUp.email(
       {
         name: userData.name,
@@ -38,7 +44,7 @@ const SignupPage = () => {
       },
       {
         onSuccess: () => {
-          redirect("/signin")
+          redirect("/signin");
         },
       },
     );
@@ -47,15 +53,13 @@ const SignupPage = () => {
     } else {
       toast.success("Signup Successful!");
     }
-    console.log("Data:",data)
-    console.log("Error:",error)
   };
+
   // const handleGoogleLogin = async () => {
   //   const data = await authClient.signIn.social({
   //     provider: "google",
   //   });
   // };
-
 
   return (
     <div
@@ -147,7 +151,7 @@ const SignupPage = () => {
               name="password"
               type={isShow ? "text" : "password"}
               validate={(value) => {
-                if (value.length<6) {
+                if (value.length < 6) {
                   return "Please use at least 6 characters";
                 }
                 if (!/^(?=.*[a-z])(?=.*[A-Z]).+$/.test(value)) {
@@ -187,7 +191,6 @@ const SignupPage = () => {
               isRequired
               name="confirmPassword"
               type={showConf ? "text" : "password"}
-             
             >
               <Label className="mb-2 text-sm font-medium text-[var(--text-primary)]">
                 Confirm Password
@@ -217,24 +220,19 @@ const SignupPage = () => {
                   )}
                 </span>
               )}
-              {isMatched==='matched'? (
+              {isMatched === "matched" ? (
                 <p className="text-sm text-green-500">Password Matched!</p>
-              ) :isMatched==='not-matched'? (
+              ) : isMatched === "not-matched" ? (
                 <p className="text-sm text-red-500">Password not matched</p>
-              ):<></>}
+              ) : (
+                <></>
+              )}
             </TextField>
             {/* BUTTONS */}
 
             <div className="flex flex-col gap-4 pt-2">
               {/* SIGN UP */}
-
-              <Button
-                type="submit"
-                className="h-12 rounded-full bg-gradient-to-r from-[#ff7a59] to-[#ffd166] font-semibold text-white shadow-lg transition-all  duration-300
-              hover:-translate-y-1 hover:shadow-xl"
-              >
-                Create Account
-              </Button>
+              <SubmitButton text="Create Account" />
 
               {/* DIVIDER */}
 

@@ -1,80 +1,53 @@
 "use client";
+import { signOut } from "@/lib/auth-client";
 import { Avatar } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 
-export default function ProfileDropdown() {
+export default function ProfileDropdown({ user }) {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const handleLogout = async () => {
+    await signOut();
+    router.refresh();
+  };
   return (
     <div>
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="
-            profile
-            flex
-            items-center
-            gap-3
-            px-3
-            py-1
-            shadow-lg
-            backdrop-blur-xl
-            rounded-full
-            transition-all
-            duration-300
+        className=" profile  flex items-center gap-3 px-3 py-1 shadow-lg backdrop-blur-xl rounded-full ransition-all duration-300
             hover:scale-[1.02]
             hover:shadow-xl  
           "
       >
         <Avatar>
           <Avatar.Image
-            alt="John Doe"
-            src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
+            alt={user?.name}
+            src={user?.image}
             height={40}
             width={40}
-            className="rounded-xl"
+            className="rounded-full"
           />
-          <Avatar.Fallback>JD</Avatar.Fallback>
+          <Avatar.Fallback>
+            {user?.name.charAt(0).toUpperCase()}
+          </Avatar.Fallback>
         </Avatar>
         <div className="hidden text-left sm:block">
-          <h4
-            className="
-                text-sm
-                font-semibold
-                text-[var(--text-primary)]
-              "
-          >
-            Md
+          <h4 className="text-sm font-semibold text-[var(--text-primary)]">
+            {`${user?.name.charAt(0).toUpperCase()}${user?.name.slice(1, 2).toLowerCase()}`}
           </h4>
-          <p
-            className="
-                text-xs
-                text-[var(--text-secondary)]
-              "
-          >
-            Pet Lover
-          </p>
+          <p className="text-xs text-[var(--text-secondary)]">Pet Lover</p>
         </div>
         {isOpen ? (
-          <BiChevronUp
-            size={20}
-            className="
-              text-[#718096]
-            "
-          />
+          <BiChevronUp size={20} className="text-primary" />
         ) : (
-          <BiChevronDown
-            size={20}
-            className="
-              text-[#718096]
-            "
-          />
+          <BiChevronDown size={20} className="text-primary" />
         )}
       </div>
       {/* menu */}
       <div
-        className={`
-          min-w-[240px]
-          rounded-3xl
+        className={`min-w-[240px] rounded-3xl
           border
           border-[var(--border-color)]
           bg-[var(--surface)]
@@ -87,26 +60,8 @@ export default function ProfileDropdown() {
           ${isOpen && "top-17"}
         `}
       >
-        <div
-          className="
-              rounded-2xl
-              px-3
-              py-3
-              opacity-100
-            "
-        >
+        <div className=" rounded-2xl px-3 py-3 opacity-100">
           <div className="flex items-center gap-3">
-            <Avatar>
-              <Avatar.Image
-                alt="John Doe"
-                src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
-                height={40}
-                width={40}
-                className="rounded-xl"
-              />
-              <Avatar.Fallback>JD</Avatar.Fallback>
-            </Avatar>
-
             <div>
               <h3
                 className="
@@ -114,14 +69,14 @@ export default function ProfileDropdown() {
                     text-[var(--text-primary)]
                   "
               >
-                Md Salauddin
+                {user?.name}
               </h3>
               <p
                 className="
                     text-sm
                     text-[var(--text-secondary)]"
               >
-                salauddin@example.com
+                {user.email}
               </p>
             </div>
           </div>
@@ -130,7 +85,7 @@ export default function ProfileDropdown() {
         <div
           className="
             px-3
-            py-3
+            py-2
             text-[var(--text-primary)]
             transition-all
             duration-300
@@ -142,15 +97,8 @@ export default function ProfileDropdown() {
         </div>
 
         <div
-          className="
-            rounded-full
-            px-3
-            py-3
-            text-red-500
-            transition-all
-            duration-300
-            profile
-          "
+          className="rounded-full px-3 py-2  text-red-500 transition-all duration-300 profile"
+          onClick={handleLogout}
         >
           Logout
         </div>
