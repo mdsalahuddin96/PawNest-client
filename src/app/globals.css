@@ -257,10 +257,12 @@ body {
 /* ======================================================
     INPUTS
 ====================================================== */
-
+.form-field {
+  @apply flex flex-col gap-2;
+}
 .input-field {
-  @apply w-full px-5 py-3 outline-none;
-  background: var(--surface);
+  @apply w-full px-5 py-2 outline-none;
+  background: var(--background);
   color: var(--text-primary);
   border: 2px solid transparent;
   border-radius: var(--radius-md);
@@ -268,7 +270,7 @@ body {
 }
 
 .input-field::placeholder {
-  color: var(--text-light);
+  color: var(--text-secondary);
 }
 
 .input-field:focus {
