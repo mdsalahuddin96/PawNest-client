@@ -15,7 +15,7 @@ export default async function Home() {
           <div className="space-x-4 h-4 flex items-center pet-card-text">
             <span>{pet.breed}</span>
             <Separator orientation="vertical" variant="secondary" className="bg-black" />
-            <span>{pet.age} years</span>
+            <span>{pet.age}yr</span>
             <Separator orientation="vertical" />
             <span>{pet.gender}</span>
             
