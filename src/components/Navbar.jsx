@@ -83,7 +83,7 @@ const Navbar = () => {
         </ul>
         {/* login & logout */}
         <div className="flex items-center gap-3">
-          <ThemeSwitch/>
+          <ThemeSwitch />
           {isPending ? (
             <div className="flex flex-col items-center">
               <Spinner color="success" size="sm" />
@@ -94,7 +94,11 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Button variant="primary" className='btn-secondary'><IoLogInOutline/> Login</Button>
+              <Link href={"/signin"}>
+                <Button variant="primary" className="btn-secondary cursor-pointer">
+                  <IoLogInOutline /> Login
+                </Button>
+              </Link>
             </>
           )}
         </div>
