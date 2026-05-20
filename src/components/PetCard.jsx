@@ -75,7 +75,7 @@ const PetCard = ({ pet }) => {
             View Details <HiArrowUpRight />
           </Button>
         </Link>
-        <Link href={"/signin"}>
+        <Link href={`/petDetails/${_id}`}>
           <Button className="cursor-pointer p-2 text-white text-sm rounded-full bg-gradient-to-r from-[#ff7a59] to-[#ffd166] hover:shadow-[var(--shadow-lg)]">
             Adopt Now
           </Button>

@@ -1,3 +1,5 @@
+
+import AdoptPetForm from "@/components/AdoptPetForm";
 import { auth } from "@/lib/auth";
 import { getPetById } from "@/service/getPetById";
 import { Button } from "@heroui/react";
@@ -20,7 +22,7 @@ const PetDetailsPage = async ({ params }) => {
         <Link href={"/all-pets"}>
           <Button
             variant="outline"
-            className="border-0 cursor-pointer flex items-center gap-5  mb-5"
+            className="border-0 cursor-pointer flex items-center gap-5 mb-5"
           >
             <FiArrowLeft /> Back to All Pets
           </Button>
@@ -30,18 +32,7 @@ const PetDetailsPage = async ({ params }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         <div className="lg:col-span-2 space-y-6">
           {/* IMAGE */}
-
-          <div
-            className="
-          relative
-          overflow-hidden
-          rounded-[32px]
-          border
-          border-[var(--border-color)]
-          bg-[var(--surface)]
-          shadow-[var(--shadow-md)]
-        "
-          >
+          <div className="relative overflow-hidden rounded-[32px] border border-[var(--border-color)] bg-[var(--surface)] shadow-[var(--shadow-md)]">
             <Image
               src={pet?.image}
               alt={pet?.name}
@@ -53,25 +44,14 @@ const PetDetailsPage = async ({ params }) => {
             <div className="pet-card-overlay" />
 
             {/* BADGES */}
-
-            <div className="absolute left-6 top-6 flex flex-wrap gap-3 ">
+            <div className="absolute left-6 top-6 flex flex-wrap gap-3">
               <span className="badge-primary">{pet?.species}</span>
-
               <span className="badge-success">{pet?.status}</span>
             </div>
 
             {/* NAME */}
-
-            <div className="absolute bottom-6 left-6 ">
-              <h1
-                className="
-              heading-font
-              text-4xl
-              md:text-5xl
-              font-bold
-              text-white
-            "
-              >
+            <div className="absolute bottom-6 left-6">
+              <h1 className="heading-font text-4xl md:text-5xl font-bold text-white">
                 {pet.name}
               </h1>
 
@@ -80,20 +60,8 @@ const PetDetailsPage = async ({ params }) => {
           </div>
 
           {/* PET INFO */}
-
           <div className="glass-card p-8">
-            <div
-              className="
-            mb-6
-
-            flex
-            items-center
-            justify-between
-            gap-4
-
-            flex-wrap
-          "
-            >
+            <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">
               <div>
                 <h2 className="section-title text-3xl">About {pet?.name}</h2>
 
@@ -108,16 +76,7 @@ const PetDetailsPage = async ({ params }) => {
             </div>
 
             {/* INFO GRID */}
-
-            <div
-              className="
-            grid
-            grid-cols-2
-            md:grid-cols-3
-
-            gap-4
-          "
-            >
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
                 <p className="text-sm text-muted">Age</p>
 
@@ -125,7 +84,7 @@ const PetDetailsPage = async ({ params }) => {
               </div>
 
               <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
-                <p className="text-sm text-muted">
+                <p className="text-sm text-muted flex items-center gap-2">
                   <FaTransgender /> Gender
                 </p>
 
@@ -164,7 +123,6 @@ const PetDetailsPage = async ({ params }) => {
             </div>
 
             {/* DESCRIPTION */}
-
             <div className="mt-8">
               <h3 className="mb-3 text-2xl font-bold">Description</h3>
 
@@ -172,7 +130,6 @@ const PetDetailsPage = async ({ params }) => {
             </div>
 
             {/* PERSONALITY */}
-
             {pet?.personality && (
               <div className="mt-8">
                 <h3 className="mb-4 text-2xl font-bold">Personality</h3>
@@ -199,103 +156,8 @@ const PetDetailsPage = async ({ params }) => {
         </div>
 
         {/* Right Section */}
-        <div className=" sticky top-24 ">
-          <div className="glass-card p-8">
-            {/* HEADER */}
-
-            <div className="mb-6">
-              <div className="badge-primary px-4 py-2">🐾 Adoption Request</div>
-
-              <h2 className="mt-4 text-3xl font-bold heading-font">
-                Adopt {pet?.name}
-              </h2>
-
-              <p className="section-subtitle mt-2">
-                Fill out the form to begin the adoption process.
-              </p>
-            </div>
-
-            {/* FORM */}
-
-            <form className="space-y-5">
-              {/* PET NAME */}
-
-              <div className="form-field">
-                <label className="text-sm font-medium">Pet Name</label>
-
-                <input
-                  type="text"
-                  value={pet?.name}
-                  readOnly
-                  className="input-field opacity-80 cursor-not-allowed"
-                />
-              </div>
-
-              {/* USER NAME */}
-
-              <div className="form-field">
-                <label className="text-sm font-medium">User Name</label>
-
-                <input
-                  type="text"
-                  value={user?.name}
-                  readOnly
-                  className="input-field opacity-80 cursor-not-allowed"
-                />
-              </div>
-
-              {/* USER EMAIL */}
-
-              <div className="form-field">
-                <label className="text-sm font-medium">User Email</label>
-
-                <input
-                  type="email"
-                  value={user?.email}
-                  readOnly
-                  className="input-field opacity-80 cursor-not-allowed"
-                />
-              </div>
-
-              {/* PICKUP DATE */}
-
-              <div className="form-field">
-                <label className="text-sm font-medium">Pickup Date</label>
-
-                <input type="date" className="input-field" />
-              </div>
-
-              {/* MESSAGE */}
-
-              <div className="form-field">
-                <label className="text-sm font-medium">Message</label>
-
-                <textarea
-                  rows={5}
-                  placeholder="Why do you want to adopt this pet?"
-                  className="
-                input-field
-
-                resize-none
-                py-4
-              "
-                />
-              </div>
-
-              {/* STATUS */}
-
-              <input type="hidden" value="pending" />
-
-              {/* BUTTON */}
-
-              <button
-                type="submit"
-                className=" btn-primary w-full py-4 rounded-2xl text-lg "
-              >
-                Adopt Now
-              </button>
-            </form>
-          </div>
+        <div className="sticky top-24">
+         <AdoptPetForm user={user} pet={pet}/>
         </div>
       </div>
     </section>
