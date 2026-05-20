@@ -98,7 +98,6 @@ const PetDetailsPage = async ({ params }) => {
               {pet.health && (
                 <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
                   <p className="text-sm text-muted flex items-center gap-1.5"><MdOutlineHealthAndSafety/>  Health</p>
-
                   <h4 className="mt-1 text-lg font-semibold">{pet?.health}</h4>
                 </div>
               )}

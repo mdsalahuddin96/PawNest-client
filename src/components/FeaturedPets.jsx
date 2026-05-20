@@ -31,7 +31,7 @@ export default function FeaturedPets({ pets }) {
         </div>
         <div className="flex items-center justify-center my-10">
           <Link href={'/all-pets'} className="cursor-pointer">
-            <button className="btn-secondary flex items-center gap-1.5"> View All <FaArrowRight /></button>
+            <button className="btn-primary px-4 flex items-center gap-1.5"> View All <FaArrowRight /></button>
           </Link>
         </div>
       </div>
