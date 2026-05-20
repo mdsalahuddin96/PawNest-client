@@ -57,13 +57,13 @@ export default function DashboardLayout({ children }) {
 
         {/* Menu */}
         <nav className="flex-1 p-4 space-y-2">
-          <a
-            href="/dashboard/my-requests"
+          <Link
+            href={"/dashboard/my-requests"}
             className="nav-link flex items-center gap-3"
             onClick={() => setOpen(false)}
           >
             <LuHeartHandshake/> My Requests
-          </a>
+          </Link>
 
           <Link
             href="/dashboard/add-pet"

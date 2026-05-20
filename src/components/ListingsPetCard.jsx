@@ -1,13 +1,14 @@
+import { Button, Modal } from "@heroui/react";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { BsEye } from "react-icons/bs";
 import { LuHeartHandshake } from "react-icons/lu";
 import { MdOutlineDeleteForever } from "react-icons/md";
 
-
-const ListingsPetCard = ({pet}) => {
-    const{image,name,status,breed,adoptionFee}=pet;
+const ListingsPetCard = ({ pet }) => {
+  const { image, name, status, breed, adoptionFee } = pet;
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="pet-card">
       {/* IMAGE */}
@@ -28,9 +29,7 @@ const ListingsPetCard = ({pet}) => {
           <div>
             <h2 className="pet-card-title">{name}</h2>
 
-            <p className="mt-1 text-[var(--text-secondary)]">
-              {breed}
-            </p>
+            <p className="mt-1 text-[var(--text-secondary)]">{breed}</p>
           </div>
 
           <div className="rounded-full bg-[#ff7a59]/10 px-4 py-2 text-sm font-semibold text-[#ff7a59]">
@@ -41,20 +40,32 @@ const ListingsPetCard = ({pet}) => {
         {/* ACTIONS */}
 
         <div className="mt-6 grid grid-cols-2 gap-3">
-          <button className="flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-primary transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
+          {/* <button className="flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-primary transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
            <LuHeartHandshake/> Requests
+          </button> */}
+
+          {/* REQUEST BUTTON */}
+
+          <button
+            onClick={() => setIsOpen(true)}
+            className="flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-primary transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]"
+          >
+            <LuHeartHandshake />
+            Requests
+          </button>
+
+          {/* MODAL */}
+
+          <button className="flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
+            <BiEdit /> Edit
           </button>
 
           <button className="flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
-           <BiEdit/> Edit
-          </button>
-
-          <button className="flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
-           <BsEye/> View
+            <BsEye /> View
           </button>
 
           <button className="flex items-center gap-1.5 rounded-2xl bg-red-500 px-4 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600">
-          <MdOutlineDeleteForever/> Delete
+            <MdOutlineDeleteForever /> Delete
           </button>
         </div>
       </div>

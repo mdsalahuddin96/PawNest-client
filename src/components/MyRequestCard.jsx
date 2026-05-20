@@ -1,0 +1,55 @@
+"use client";
+import { IoEyeSharp } from "react-icons/io5";
+import { MdCancel } from "react-icons/md";
+
+const MyRequestCard = ({ request }) => {
+  return (
+    <div className="pet-card p-6">
+      {/* TOP */}
+
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div>
+          <h2 className="pet-card-title">{request.name}</h2>
+
+          <p className="mt-2 text-sm text-[var(--text-secondary)]">
+            Request Date:
+            <span className="ml-2 font-medium text-[var(--text-primary)]">
+              {new Date(request.requested_date).toLocaleDateString("en-BD", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}
+            </span>
+          </p>
+
+          <p className="mt-1 text-sm text-[var(--text-secondary)]">
+            Pickup Date:
+            <span className="ml-2 font-medium text-[var(--text-primary)]">
+              {new Date(request.pickup_date).toLocaleDateString("en-BD", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}
+            </span>
+          </p>
+        </div>
+
+        <div className="badge-primary w-fit">{request.requested_status}</div>
+      </div>
+
+      {/* ACTIONS */}
+
+      <div className="mt-8 flex flex-col sm:flex-row gap-4">
+        <button className="flex-1 flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-5 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
+          <IoEyeSharp /> View Details
+        </button>
+
+        <button className="flex-1 flex items-center gap-1.5 rounded-2xl bg-red-500 px-5 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600">
+          <MdCancel /> Cancel Request
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default MyRequestCard;

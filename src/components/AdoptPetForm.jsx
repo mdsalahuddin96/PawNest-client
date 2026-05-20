@@ -1,6 +1,5 @@
 "use client";
 import { SubmitButton } from "@/components/SubmitBtn";
-import { redirect } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 const AdoptPetForm = ({ user, pet }) => {
@@ -28,7 +27,6 @@ const AdoptPetForm = ({ user, pet }) => {
       const data = await res.json();
       if (data.insertedId) {
         toast.success(`Adopt request submit successfully!`);
-        redirect("/dashboard/my-requests");
       } else {
         toast.error("Something went wrong");
       }

@@ -28,7 +28,7 @@ const AddPetPage = () => {
     const data = await res.json();
     if (data.insertedId) {
       toast.success(`Pet Added Successfully!`);
-      redirect("/my-listings");
+      redirect("/dashboard/my-listings");
     } else {
       toast.error("Something went wrong");
     }
