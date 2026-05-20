@@ -103,7 +103,6 @@ export default function DashboardLayout({ children }) {
 
         {/* TOP BAR */}
         <div className="flex items-center justify-between mb-8">
-
           {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setOpen(true)}
@@ -111,11 +110,9 @@ export default function DashboardLayout({ children }) {
           >
             ☰
           </button>
-
           <h2 className="text-xl md:text-3xl font-bold heading-font">
             Dashboard
           </h2>
-
           <ThemeSwitch />
         </div>
 
