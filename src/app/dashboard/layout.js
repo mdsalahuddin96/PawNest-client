@@ -74,7 +74,7 @@ export default function DashboardLayout({ children }) {
           </Link>
 
           <a
-            href="/dashboard/listings"
+            href="/dashboard/my-listings"
             className="nav-link flex items-center gap-3"
             onClick={() => setOpen(false)}
           >

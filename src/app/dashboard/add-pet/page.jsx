@@ -2,14 +2,36 @@
 
 import { SubmitButton } from "@/components/SubmitBtn";
 import { useSession } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 
 const AddPetPage = () => {
   const { data } = useSession();
   const user = data?.user;
-  console.log(user)
+
   const onSubmit = async (formData) => {
     const petData = Object.fromEntries(formData.entries());
-    console.log(petData);
+    if (petData?.vaccinated == "true") {
+      petData.vaccinated = true;
+    } else {
+      petData.vaccinated == false;
+    }
+    petData.status = "Available";
+    petData.owner_id = user?.id;
+    const res = await fetch(`http://localhost:8000/add-pet`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(petData),
+    });
+    const data = await res.json();
+    if (data.insertedId) {
+      toast.success(`Pet Added Successfully!`);
+      redirect("/my-listings");
+    } else {
+      toast.error("Something went wrong");
+    }
   };
   return (
     <section className="container mx-auto">
@@ -39,7 +61,6 @@ const AddPetPage = () => {
               <label className="font-medium text-[var(--text-primary)]">
                 Pet Name <span className="text-red-500">*</span>
               </label>
-
               <input
                 name="name"
                 type="text"
@@ -149,7 +170,7 @@ const AddPetPage = () => {
                 Location <span className="text-red-500">*</span>
               </label>
               <input
-              name="location"
+                name="location"
                 type="text"
                 placeholder="Enter location"
                 className="input-field"
@@ -196,7 +217,7 @@ const AddPetPage = () => {
               </label>
 
               <input
-                name="owner-email"
+                name="owner_email"
                 type="email"
                 value={user?.email}
                 readOnly
