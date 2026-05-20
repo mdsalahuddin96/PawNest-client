@@ -129,15 +129,12 @@ body {
 
 .section-title {
   @apply text-3xl md:text-5xl font-bold;
-
   font-family: "Fredoka", sans-serif;
-
   color: var(--text-primary);
 }
 
 .section-subtitle {
   @apply text-base md:text-lg leading-relaxed;
-
   color: var(--text-secondary);
 }
 

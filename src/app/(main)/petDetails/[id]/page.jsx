@@ -12,7 +12,7 @@ const PetDetailsPage = async ({ params }) => {
   const { user } = await auth.api.getSession({
     headers: await headers(),
   });
-  console.log(user);
+
   return (
     <section className="my-10 container mx-auto">
       <div className="w-40">
