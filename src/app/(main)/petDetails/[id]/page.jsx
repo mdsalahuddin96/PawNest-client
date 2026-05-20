@@ -8,6 +8,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaTransgender } from "react-icons/fa";
 import { FiArrowLeft } from "react-icons/fi";
+import { IoMdColorPalette } from "react-icons/io";
+import { LuMapPinCheckInside } from "react-icons/lu";
+import { MdOutlineHealthAndSafety } from "react-icons/md";
+import { TbVaccine } from "react-icons/tb";
 
 const PetDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -84,7 +88,7 @@ const PetDetailsPage = async ({ params }) => {
               </div>
 
               <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
-                <p className="text-sm text-muted flex items-center gap-2">
+                <p className="text-sm text-muted flex items-center gap-1.5">
                   <FaTransgender /> Gender
                 </p>
 
@@ -93,7 +97,7 @@ const PetDetailsPage = async ({ params }) => {
 
               {pet.health && (
                 <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
-                  <p className="text-sm text-muted">Health</p>
+                  <p className="text-sm text-muted flex items-center gap-1.5"><MdOutlineHealthAndSafety/>  Health</p>
 
                   <h4 className="mt-1 text-lg font-semibold">{pet?.health}</h4>
                 </div>
@@ -101,22 +105,22 @@ const PetDetailsPage = async ({ params }) => {
 
               {pet?.color && (
                 <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
-                  <p className="text-sm text-muted">Color</p>
+                  <p className="text-sm text-muted flex items-center gap-1.5"><IoMdColorPalette/>  Color</p>
 
                   <h4 className="mt-1 text-lg font-semibold">{pet.color}</h4>
                 </div>
               )}
 
               <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
-                <p className="text-sm text-muted">Vaccinated</p>
+                <p className="text-sm text-muted flex items-center gap-1.5"><TbVaccine/> Vaccinated</p>
 
                 <h4 className="mt-1 text-lg font-semibold">
                   {pet?.vaccinated ? "Yes" : "No"}
                 </h4>
               </div>
 
-              <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
-                <p className="text-sm text-muted">Location</p>
+              <div className="bg-[var(--surface-soft)] rounded-2xl p-4 ">
+                <p className="text-sm text-muted flex items-center gap-1.5"><LuMapPinCheckInside/> Location</p>
 
                 <h4 className="mt-1 text-lg font-semibold">{pet?.location}</h4>
               </div>
