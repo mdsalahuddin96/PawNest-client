@@ -20,7 +20,6 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data, isPending } = useSession();
   const user = data?.user;
-  console.log(user);
 
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-separator py-2 navbar-blur ">

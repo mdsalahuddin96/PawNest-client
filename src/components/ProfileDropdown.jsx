@@ -82,7 +82,7 @@ export default function ProfileDropdown({ user }) {
             </div>
           </div>
         </div>
-        <Link href={'/dashboard'} className="cursor-pointer">
+        <Link href={"/dashboard"} className="cursor-pointer">
           <div className="px-3 py-2  text-[var(--text-primary)] transition-all duration-300 profile rounded-full">
             Dashboard
           </div>

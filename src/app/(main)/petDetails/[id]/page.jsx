@@ -4,6 +4,7 @@ import { Button } from "@heroui/react";
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
+import { FaTransgender } from "react-icons/fa";
 import { FiArrowLeft } from "react-icons/fi";
 
 const PetDetailsPage = async ({ params }) => {
@@ -26,14 +27,7 @@ const PetDetailsPage = async ({ params }) => {
         </Link>
       </div>
 
-      <div
-        className="grid
-      grid-cols-1
-      lg:grid-cols-3
-      gap-8
-      items-start
-    "
-      >
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         <div className="lg:col-span-2 space-y-6">
           {/* IMAGE */}
 
@@ -68,13 +62,7 @@ const PetDetailsPage = async ({ params }) => {
 
             {/* NAME */}
 
-            <div
-              className="
-            absolute
-            bottom-6
-            left-6
-          "
-            >
+            <div className="absolute bottom-6 left-6 ">
               <h1
                 className="
               heading-font
@@ -140,7 +128,9 @@ const PetDetailsPage = async ({ params }) => {
               </div>
 
               <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
-                <p className="text-sm text-muted">Gender</p>
+                <p className="text-sm text-muted">
+                  <FaTransgender /> Gender
+                </p>
 
                 <h4 className="mt-1 text-lg font-semibold">{pet.gender}</h4>
               </div>

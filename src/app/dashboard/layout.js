@@ -5,6 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import ThemeSwitch from "@/components/ThemeSwitch";
 import logo from '@/assets/logo4.png'
+import { LuHeartHandshake } from "react-icons/lu";
+import { FaPlus } from "react-icons/fa";
+import { GiPawPrint } from "react-icons/gi";
 
 export default function DashboardLayout({ children }) {
   const [open, setOpen] = useState(false);
@@ -59,23 +62,23 @@ export default function DashboardLayout({ children }) {
             className="nav-link flex items-center gap-3"
             onClick={() => setOpen(false)}
           >
-            📨 My Requests
+            <LuHeartHandshake/> My Requests
           </a>
 
-          <a
+          <Link
             href="/dashboard/add-pet"
             className="nav-link flex items-center gap-3"
             onClick={() => setOpen(false)}
           >
-            ➕ Add Pet
-          </a>
+           <FaPlus /> Add Pet
+          </Link>
 
           <a
             href="/dashboard/listings"
             className="nav-link flex items-center gap-3"
             onClick={() => setOpen(false)}
           >
-            🐶 My Listings
+            <GiPawPrint/> My Listings
           </a>
         </nav>
 
