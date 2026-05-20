@@ -20,7 +20,8 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data, isPending } = useSession();
   const user = data?.user;
-  
+  console.log(user);
+
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-separator py-2 navbar-blur ">
       <header className="flex h-16 items-center justify-between px-6 container mx-auto">
@@ -55,18 +56,20 @@ const Navbar = () => {
           </button>
         </div>
         {/* logo */}
-        <div className="flex gap-2 items-center">
-          <Image
-            src={logo}
-            alt="logo"
-            height={50}
-            width={50}
-            className="rounded-full"
-          />
-          <h1 className="gradient-text heading-font text-3xl font-semibold">
-            PawNest
-          </h1>
-        </div>
+        <Link href={"/"} className="cursor-pointer">
+          <div className="flex gap-2 items-center">
+            <Image
+              src={logo}
+              alt="logo"
+              height={50}
+              width={50}
+              className="rounded-full"
+            />
+            <h1 className="gradient-text heading-font text-3xl font-semibold">
+              PawNest
+            </h1>
+          </div>
+        </Link>
         {/* Navlinks */}
         <ul className="hidden items-center gap-4 md:flex">
           {navItems.map((item, ind) => (
@@ -83,7 +86,7 @@ const Navbar = () => {
             </div>
           ) : user ? (
             <>
-              <ProfileDropdown user={user}/>
+              <ProfileDropdown user={user} />
             </>
           ) : (
             <>

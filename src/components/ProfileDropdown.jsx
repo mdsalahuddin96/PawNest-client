@@ -1,6 +1,7 @@
 "use client";
 import { signOut } from "@/lib/auth-client";
 import { Avatar } from "@heroui/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
@@ -81,20 +82,11 @@ export default function ProfileDropdown({ user }) {
             </div>
           </div>
         </div>
-
-        <div
-          className="
-            px-3
-            py-2
-            text-[var(--text-primary)]
-            transition-all
-            duration-300
-            profile
-            rounded-full
-            "
-        >
-          Dashboard
-        </div>
+        <Link href={'/dashboard'} className="cursor-pointer">
+          <div className="px-3 py-2  text-[var(--text-primary)] transition-all duration-300 profile rounded-full">
+            Dashboard
+          </div>
+        </Link>
 
         <div
           className="rounded-full px-3 py-2  text-red-500 transition-all duration-300 profile"
