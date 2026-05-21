@@ -34,7 +34,7 @@ const AddPetPage = () => {
     }
   };
   return (
-    <section className="container mx-auto">
+    <section className="container mx-auto ">
       <div className="max-w-4xl mx-auto">
         {/* HEADER */}
 

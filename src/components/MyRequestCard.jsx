@@ -1,9 +1,25 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { IoEyeSharp } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const MyRequestCard = ({ request }) => {
+  const router=useRouter()
+  const handleCancel = async () => {
+    const res = await fetch(`http://localhost:8000/deleteReq/${request._id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    const result = await res.json();
+    if (result.deletedCount > 0) {
+      toast.error("Request Canceled!");
+      router.refresh();
+    }
+  };
   return (
     <div className="pet-card p-6">
       {/* TOP */}
@@ -52,7 +68,10 @@ const MyRequestCard = ({ request }) => {
         </Link>
 
         {request.requested_status !== "Approved" && (
-          <button className=" flex items-center gap-1.5 rounded-2xl bg-red-500 px-5 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600">
+          <button
+            onClick={handleCancel}
+            className=" flex items-center gap-1.5 rounded-2xl bg-red-500 px-5 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600"
+          >
             <MdCancel /> Cancel Request
           </button>
         )}

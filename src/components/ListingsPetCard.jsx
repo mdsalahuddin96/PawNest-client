@@ -7,10 +7,27 @@ import { BsEye } from "react-icons/bs";
 import { LuHeartHandshake } from "react-icons/lu";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import RequestModal from "@/components/RequestModal";
+import Link from "next/link";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
-const ListingsPetCard = ({ pet,petRequest }) => {
+const ListingsPetCard = ({ pet, petRequest }) => {
   const { _id, image, name, status, breed, adoptionFee } = pet;
   const [isOpen, setIsOpen] = useState(false);
+  const router=useRouter()
+  const handleDelete=async()=>{
+    const res=await fetch(`http://localhost:8000/deletePet/${_id}`,{
+      method:"DELETE",
+      headers:{
+        "content-type":"application/json"
+      }
+    })
+    const result=await res.json()
+    if(result.deletedCount>0){
+      toast.error("Pet deleted!")
+      router.refresh()
+    }
+  }
   return (
     <div className="pet-card relative">
       {/* IMAGE */}
@@ -22,7 +39,17 @@ const ListingsPetCard = ({ pet,petRequest }) => {
           width={200}
           className="h-72 w-full object-cover transition-all duration-500 hover:scale-110"
         />
-        <div className="absolute top-4 right-4 badge-success">{status}</div>
+        {status == "Available" ? (
+          <div className="badge-success absolute top-5 right-1.5 gap-1.5">
+            {/* <AiFillCheckCircle /> */}
+            {status}
+          </div>
+        ) : (
+          <div className="badge-primary absolute top-5 right-1.5 gap-1.5">
+            {/* <IoIosCloseCircle /> */}
+            {status}
+          </div>
+        )}
       </div>
 
       {/* BODY */}
@@ -50,12 +77,13 @@ const ListingsPetCard = ({ pet,petRequest }) => {
           <button className="flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
             <BiEdit /> Edit
           </button>
+          <Link href={`/petDetails/${_id}`}>
+            <button className="flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
+              <BsEye /> View
+            </button>
+          </Link>
 
-          <button className="flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
-            <BsEye /> View
-          </button>
-
-          <button className="flex items-center gap-1.5 rounded-2xl bg-red-500 px-4 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600">
+          <button onClick={handleDelete} className="flex items-center gap-1.5 rounded-2xl bg-red-500 px-4 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600">
             <MdOutlineDeleteForever /> Delete
           </button>
         </div>

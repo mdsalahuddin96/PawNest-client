@@ -7,7 +7,7 @@ const AllPetsPage = async ({ searchParams }) => {
   const { search, species, fee } = await searchParams;
   const pets = await getAllPets(search, species, fee);
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto mb-10">
       <div className="my-10">
         <div className="text-center space-y-1">
           <h1 className="section-title">Find Your Perfect Companion 🐾</h1>
@@ -30,7 +30,7 @@ const AllPetsPage = async ({ searchParams }) => {
           </h2>
 
           <p className="mt-3 max-w-md text-[var(--text-secondary)] leading-relaxed">
-            We couldn’t find any pets matching your search or filter. Try using
+            We couldn&apos;t find any pets matching your search or filter. Try using
             different keywords or explore other adorable pets.
           </p>
         </div>

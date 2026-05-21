@@ -4,13 +4,14 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { LuHeartHandshake } from "react-icons/lu";
 import { IoMdClose } from "react-icons/io";
-import { BiCheck, BiCross } from "react-icons/bi";
 import { CiCircleCheck } from "react-icons/ci";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const RequestModal = ({ isOpen, onClose, request }) => {
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
   const handleRequestStatus = async (status) => {
     try {
       const response = await fetch(
@@ -25,7 +26,6 @@ const RequestModal = ({ isOpen, onClose, request }) => {
           }),
         },
       );
-
       const result = await response.json();
       if (result.modifiedCount > 0) {
         toast.success(`Request ${status} successfully`);
@@ -33,6 +33,24 @@ const RequestModal = ({ isOpen, onClose, request }) => {
       }
     } catch (error) {
       console.error(error);
+    }
+    if (status === "Approved") {
+      const upDatePetRes = await fetch(
+        `http://localhost:8000/upDatePet/status/${request.pet_id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            status: "Adopted",
+          }),
+        },
+      );
+      const result = await upDatePetRes.json();
+      if (result.modifiedCount > 0) {
+        router.refresh();
+      }
     }
   };
   useEffect(() => {
@@ -91,29 +109,31 @@ const RequestModal = ({ isOpen, onClose, request }) => {
           </div>
 
           {/* Footer */}
-          {request.requested_status === "Pending" ? (
-            <div className="mt-6 flex  justify-between">
+          <div className="mt-6 flex justify-end">
+            {request.requested_status === "Pending" ? (
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={() => handleRequestStatus("Approved")}
+                  className="flex items-center  gap-1.5 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-400 px-2 py-1 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
+                >
+                  <CiCircleCheck /> Approve
+                </button>
+                <button
+                  onClick={() => handleRequestStatus("Rejected")}
+                  className="flex items-center gap-1.5 rounded-2xl border border-red-400/30 bg-red-500/10 px-2 py-1 font-semibold text-red-500 backdrop-blur-xl transition-all duration-300  hover:bg-red-500 hover:text-white"
+                >
+                  <FaRegCircleXmark /> Reject
+                </button>
+              </div>
+            ) : (
               <button
-                onClick={() => handleRequestStatus("Approved")}
-                className="flex items-center  gap-1.5 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-400 px-2 py-1 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
+                onClick={onClose}
+                className="rounded-full bg-gray-100 dark:bg-gray-800 px-5 py-2.5 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               >
-                <CiCircleCheck /> Approve
+                Close
               </button>
-              <button
-                onClick={() => handleRequestStatus("Rejected")}
-                className="flex items-center gap-1.5 rounded-2xl border border-red-400/30 bg-red-500/10 px-2 py-1 font-semibold text-red-500 backdrop-blur-xl transition-all duration-300  hover:bg-red-500 hover:text-white"
-              >
-                <FaRegCircleXmark /> Reject
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={onClose}
-              className="rounded-full bg-gray-100 dark:bg-gray-800 px-5 py-2.5 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            >
-              Close
-            </button>
-          )}
+            )}
+          </div>
         </div>
       ) : (
         <div className="relative w-full max-w-md scale-100 transform overflow-hidden rounded-3xl border border-white/10 bg-white p-6 shadow-2xl dark:bg-[#111827] text-[#2d3748] dark:text-white transition-all">
