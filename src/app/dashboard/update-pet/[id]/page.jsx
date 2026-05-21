@@ -40,7 +40,6 @@ const UpdatePet = () => {
     } else {
       toast.error("Something went wrong");
     }
-    console.log(data)
   };
   return (
     <section className="container mx-auto ">
