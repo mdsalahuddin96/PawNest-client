@@ -33,11 +33,11 @@ const SigninPage = () => {
       toast.success("Login Successful!");
     }
   };
-  // const handleGoogleLogin = async () => {
-  //   const data = await authClient.signIn.social({
-  //     provider: "google",
-  //   });
-  // };
+  const handleGoogleLogin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[var(--background)] flex flex-col items-center justify-center px-4 py-10">
@@ -135,6 +135,7 @@ const SigninPage = () => {
               {/* GOOGLE BUTTON */}
 
               <Button
+              onClick={handleGoogleLogin}
                 variant="bordered"
                 className="h-12 rounded-full border border-[#ff7a59]/20 bg-[var(--surface)] font-medium text-[var(--text-primary)] backdrop-blur-xl
               transition-all
@@ -143,6 +144,7 @@ const SigninPage = () => {
               hover:bg-[#fff1e6]
               dark:hover:bg-[#243244]
               flex items-center justify-center gap-1.5
+              cursor-pointer
             "
               >
                 <FcGoogle size={22} />

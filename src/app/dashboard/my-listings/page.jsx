@@ -67,30 +67,34 @@ const MyListingsPage = async () => {
         </div>
 
         {/* PET CARDS */}
+        {pets.length === 0 ? (
+          <div className="flex flex-col items-center justify-center rounded-[32px] border border-[var(--border-color)] bg-[var(--surface)] px-6 py-20 text-center shadow-[var(--shadow-md)]">
+            <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-[var(--surface-soft)] text-5xl">
+              🐾
+            </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {/* CARD */}
+            <h2 className="heading-font text-3xl font-bold text-[var(--text-primary)]">
+              You haven’t listed any pets yet
+            </h2>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            {/* CARD */}
+            {pets.map((pet) => {
+              const petRequest = requestPets.find(
+                (req) => req.pet_id === pet._id,
+              );
 
-          {pets.length === 0 ? (
-            <></>
-          ) : (
-            <>
-              {pets.map((pet) => {
-                const petRequest = requestPets.find(
-                  (req) => req.pet_id === pet._id,
-                );
-
-                return (
-                  <ListingsPetCard
-                    key={pet._id}
-                    pet={pet}
-                    petRequest={petRequest}
-                  />
-                );
-              })}
-            </>
-          )}
-        </div>
+              return (
+                <ListingsPetCard
+                  key={pet._id}
+                  pet={pet}
+                  petRequest={petRequest}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );

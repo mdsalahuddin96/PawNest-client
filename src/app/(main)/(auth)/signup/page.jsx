@@ -255,6 +255,7 @@ const SignupPage = () => {
               hover:bg-[#fff1e6]
               dark:hover:bg-[#243244]
               flex items-center justify-center gap-1.5
+              cursor-pointer
             "
               >
                 <FcGoogle size={22} />

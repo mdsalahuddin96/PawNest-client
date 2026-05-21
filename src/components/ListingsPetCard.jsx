@@ -10,10 +10,12 @@ import RequestModal from "@/components/RequestModal";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import DeleteModal from "@/components/DeleteModal";
 
 const ListingsPetCard = ({ pet, petRequest }) => {
   const { _id, image, name, status, breed, adoptionFee } = pet;
   const [isOpen, setIsOpen] = useState(false);
+  const [isDelOpen,setIsDelOpen]=useState(false)
   const router=useRouter()
   const handleDelete=async()=>{
     const res=await fetch(`http://localhost:8000/deletePet/${_id}`,{
@@ -83,7 +85,7 @@ const ListingsPetCard = ({ pet, petRequest }) => {
             </button>
           </Link>
 
-          <button onClick={handleDelete} className="flex items-center gap-1.5 rounded-2xl bg-red-500 px-4 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600">
+          <button onClick={()=>setIsDelOpen(true)} className="flex items-center gap-1.5 rounded-2xl bg-red-500 px-4 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600">
             <MdOutlineDeleteForever /> Delete
           </button>
         </div>
@@ -93,8 +95,13 @@ const ListingsPetCard = ({ pet, petRequest }) => {
       <RequestModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        petName={name}
         request={petRequest}
+      />
+      <DeleteModal
+        isDelOpen={isDelOpen}
+        onClose={()=>setIsDelOpen(false)}
+        petName={name}
+        onConfirm={handleDelete}
       />
     </div>
   );
