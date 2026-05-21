@@ -73,13 +73,13 @@ export default function DashboardLayout({ children }) {
            <FaPlus /> Add Pet
           </Link>
 
-          <a
+          <Link
             href="/dashboard/my-listings"
             className="nav-link flex items-center gap-3"
             onClick={() => setOpen(false)}
           >
             <GiPawPrint/> My Listings
-          </a>
+          </Link>
         </nav>
 
         {/* Bottom Profile */}
