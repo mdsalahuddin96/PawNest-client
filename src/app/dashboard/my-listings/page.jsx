@@ -14,7 +14,7 @@ const MyListingsPage = async () => {
   );
   const pets = await response.json();
   const available = pets.filter((pet) => pet.status === "Available");
-  const adopted = pets.filter((pet) => pet.status === "adopted");
+  const adopted = pets.filter((pet) => pet.status === "Adopted");
   const requestPetRes = await fetch(`http://localhost:8000/request`);
   const requestPets = await requestPetRes.json();
 

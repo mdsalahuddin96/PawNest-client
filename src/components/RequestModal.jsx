@@ -7,9 +7,34 @@ import { IoMdClose } from "react-icons/io";
 import { BiCheck, BiCross } from "react-icons/bi";
 import { CiCircleCheck } from "react-icons/ci";
 import { FaRegCircleXmark } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 const RequestModal = ({ isOpen, onClose, request }) => {
   const [mounted, setMounted] = useState(false);
+  const handleRequestStatus = async (status) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/request/status/${request._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            requested_status: status,
+          }),
+        },
+      );
+
+      const result = await response.json();
+      if (result.modifiedCount > 0) {
+        toast.success(`Request ${status} successfully`);
+        onClose();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     setMounted(true);
     return () => setMounted(false);
@@ -68,10 +93,16 @@ const RequestModal = ({ isOpen, onClose, request }) => {
           {/* Footer */}
           {request.requested_status === "Pending" ? (
             <div className="mt-6 flex  justify-between">
-              <button className="flex items-center  gap-1.5 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-400 px-2 py-1 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl">
+              <button
+                onClick={() => handleRequestStatus("Approved")}
+                className="flex items-center  gap-1.5 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-400 px-2 py-1 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
+              >
                 <CiCircleCheck /> Approve
               </button>
-              <button className="flex items-center gap-1.5 rounded-2xl border border-red-400/30 bg-red-500/10 px-2 py-1 font-semibold text-red-500 backdrop-blur-xl transition-all duration-300  hover:bg-red-500 hover:text-white">
+              <button
+                onClick={() => handleRequestStatus("Rejected")}
+                className="flex items-center gap-1.5 rounded-2xl border border-red-400/30 bg-red-500/10 px-2 py-1 font-semibold text-red-500 backdrop-blur-xl transition-all duration-300  hover:bg-red-500 hover:text-white"
+              >
                 <FaRegCircleXmark /> Reject
               </button>
             </div>

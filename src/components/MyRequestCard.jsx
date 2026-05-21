@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { IoEyeSharp } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
 
@@ -34,19 +35,27 @@ const MyRequestCard = ({ request }) => {
           </p>
         </div>
 
-        <div className="badge-primary w-fit">{request.requested_status}</div>
+        <div
+          className={`${request.requested_status === "Approved" ? "badge-success" : "badge-primary w-fit"}`}
+        >
+          {request.requested_status}
+        </div>
       </div>
 
       {/* ACTIONS */}
 
       <div className="mt-8 flex flex-col sm:flex-row gap-4">
-        <button className="flex-1 flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-5 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
-          <IoEyeSharp /> View Details
-        </button>
+        <Link href={`/petDetails/${request.pet_id}`}>
+          <button className=" flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-5 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
+            <IoEyeSharp /> View Details
+          </button>
+        </Link>
 
-        <button className="flex-1 flex items-center gap-1.5 rounded-2xl bg-red-500 px-5 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600">
-          <MdCancel /> Cancel Request
-        </button>
+        {request.requested_status !== "Approved" && (
+          <button className=" flex items-center gap-1.5 rounded-2xl bg-red-500 px-5 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600">
+            <MdCancel /> Cancel Request
+          </button>
+        )}
       </div>
     </div>
   );

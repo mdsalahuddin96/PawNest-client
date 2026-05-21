@@ -13,8 +13,6 @@ import ThemeSwitch from "./ThemeSwitch";
 const navItems = [
   { href: "/", text: "Home" },
   { href: "/all-pets", text: "All Pets" },
-  { href: "/my-requests", text: "My Requests" },
-  { href: "/add-pet", text: "Add Pet" },
 ];
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
