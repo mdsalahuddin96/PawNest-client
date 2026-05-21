@@ -15,7 +15,11 @@ import { TbVaccine } from "react-icons/tb";
 
 const PetDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const pet = await getPetById(id);
+  const {token}=await auth.api.getToken({
+    headers:await headers()
+  })
+
+  const pet = await getPetById(id,token);
   const { user } = await auth.api.getSession({
     headers: await headers(),
   });

@@ -6,16 +6,26 @@ const MyListingsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-
+  const {token}=await auth.api.getToken({
+    headers:await headers()
+  })
   const user = session?.user;
 
   const response = await fetch(
-    `http://localhost:8000/petsBy-userId/${user?.id}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/petsBy-userId/${user?.id}`,{
+      headers:{
+        authorization:`Bearer ${token}`
+      }
+    },
   );
   const pets = await response.json();
   const available = pets.filter((pet) => pet.status === "Available");
   const adopted = pets.filter((pet) => pet.status === "Adopted");
-  const requestPetRes = await fetch(`http://localhost:8000/request`);
+  const requestPetRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request`,{
+    headers:{
+      authorization:`Bearer ${token}`
+    }
+  });
   const requestPets = await requestPetRes.json();
 
   return (

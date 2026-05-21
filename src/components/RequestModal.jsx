@@ -14,12 +14,14 @@ const RequestModal = ({ isOpen, onClose, request }) => {
   const router = useRouter();
   const handleRequestStatus = async (status) => {
     try {
+      const {data:tokenData}=await authClient.token()
       const response = await fetch(
-        `http://localhost:8000/request/status/${request._id}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/request/status/${request._id}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            authorization:`Bearer ${tokenData?.token}`
           },
           body: JSON.stringify({
             requested_status: status,
@@ -35,12 +37,14 @@ const RequestModal = ({ isOpen, onClose, request }) => {
       console.error(error);
     }
     if (status === "Approved") {
+      const {data:tokenData}=await authClient.token()
       const upDatePetRes = await fetch(
-        `http://localhost:8000/upDatePet/status/${request.pet_id}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/upDatePet/status/${request.pet_id}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            authorization:`Bearer ${tokenData?.token}`
           },
           body: JSON.stringify({
             status: "Adopted",

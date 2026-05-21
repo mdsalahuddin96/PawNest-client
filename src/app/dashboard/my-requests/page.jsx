@@ -6,7 +6,14 @@ const MyRequestsPage = async () => {
   const { user } = await auth.api.getSession({
     headers: await headers(),
   });
-  const res = await fetch(`http://localhost:8000/request/${user?.email}`);
+  const {token}=await auth.api.getToken({
+    headers:await headers()
+  })
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/request/${user?.email}`,{
+    headers:{
+      authorization:`Bearer ${token}`
+    }
+  });
   const myRequests = await res.json();
   return (
     <section className="section-padding">

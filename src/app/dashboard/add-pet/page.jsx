@@ -1,7 +1,7 @@
 "use client";
 
 import { SubmitButton } from "@/components/SubmitBtn";
-import { useSession } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 
@@ -18,10 +18,12 @@ const AddPetPage = () => {
     }
     petData.status = "Available";
     petData.owner_id = user?.id;
-    const res = await fetch(`http://localhost:8000/add-pet`, {
+    const {data:tokenData}=await authClient.token()
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/add-pet`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization:`Bearer ${tokenData?.token}`
       },
       body: JSON.stringify(petData),
     });

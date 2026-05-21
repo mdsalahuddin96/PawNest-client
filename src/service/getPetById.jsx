@@ -1,5 +1,9 @@
-export const getPetById=async(id)=>{
-const res=await fetch(`http://localhost:8000/petDetails/${id}`)
+export const getPetById=async(id,token)=>{
+const res=await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petDetails/${id}`,{
+    headers:{
+        authorization:`Bearer ${token}`
+    }
+});
 const pet=await res.json()
 return pet;
 }

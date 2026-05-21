@@ -1,6 +1,6 @@
 "use client";
 import { SubmitButton } from "@/components/SubmitBtn";
-import { useSession } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { redirect, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -13,7 +13,7 @@ const UpdatePet = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/petDetails/${id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petDetails/${id}`);
         const result = await response.json();
         
         setPetData(result);
@@ -25,11 +25,13 @@ const UpdatePet = () => {
   }, [id]);
   
   const onSubmit = async (formData) => {
+    const {data:tokenData}=await authClient.token()
     const petData = Object.fromEntries(formData.entries());
-    const res = await fetch(`http://localhost:8000/update-pet/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/update-pet/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
+        authorization:`Bearer ${tokenData?.token}`
       },
       body: JSON.stringify(petData),
     });

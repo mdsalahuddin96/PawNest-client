@@ -1,13 +1,15 @@
 "use client";
 import { SubmitButton } from "@/components/SubmitBtn";
+import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 import { toast } from "react-toastify";
 const AdoptPetForm = ({ user, pet }) => {
   const [pickupDate, setPickupDate] = useState(null);
   const [dateError, setDateError] = useState(false);
   const {owner_email, owner_id, _id,status}=pet
-  console.log(status)
+  
   const onSubmit = async (formData) => {
+    const {data:tokenData}=await authClient.token()
     const requestData = Object.fromEntries(formData.entries());
     requestData.owner_email = owner_email;
     requestData.owner_id = owner_id;
@@ -22,10 +24,11 @@ const AdoptPetForm = ({ user, pet }) => {
           toast.error("This pet already adopted!")
           return null;
         }
-      const res = await fetch("http://localhost:8000/adoptRequest", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adoptRequest`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
+          authorization:`Bearer ${tokenData?.token}`
         },
         body: JSON.stringify(requestData),
       });
