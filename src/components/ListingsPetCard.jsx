@@ -15,21 +15,21 @@ import DeleteModal from "@/components/DeleteModal";
 const ListingsPetCard = ({ pet, petRequest }) => {
   const { _id, image, name, status, breed, adoptionFee } = pet;
   const [isOpen, setIsOpen] = useState(false);
-  const [isDelOpen,setIsDelOpen]=useState(false)
-  const router=useRouter()
-  const handleDelete=async()=>{
-    const res=await fetch(`http://localhost:8000/deletePet/${_id}`,{
-      method:"DELETE",
-      headers:{
-        "content-type":"application/json"
-      }
-    })
-    const result=await res.json()
-    if(result.deletedCount>0){
-      toast.error("Pet deleted!")
-      router.refresh()
+  const [isDelOpen, setIsDelOpen] = useState(false);
+  const router = useRouter();
+  const handleDelete = async () => {
+    const res = await fetch(`http://localhost:8000/deletePet/${_id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    const result = await res.json();
+    if (result.deletedCount > 0) {
+      toast.error("Pet deleted!");
+      router.refresh();
     }
-  }
+  };
   return (
     <div className="pet-card relative">
       {/* IMAGE */}
@@ -76,16 +76,22 @@ const ListingsPetCard = ({ pet, petRequest }) => {
             <LuHeartHandshake /> Requests
           </button>
 
-          <button className="flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
-            <BiEdit /> Edit
-          </button>
-          <Link href={`/petDetails/${_id}`}>
-            <button className="flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
+          <Link href={`/dashboard/update-pet/${_id}`} className="rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
+            <button className="flex items-center gap-1.5 ">
+              <BiEdit /> Edit
+            </button>
+          </Link>
+
+          <Link href={`/petDetails/${_id}`} className="rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
+            <button className="flex items-center gap-1.5 ">
               <BsEye /> View
             </button>
           </Link>
 
-          <button onClick={()=>setIsDelOpen(true)} className="flex items-center gap-1.5 rounded-2xl bg-red-500 px-4 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600">
+          <button
+            onClick={() => setIsDelOpen(true)}
+            className="flex items-center gap-1.5 rounded-2xl bg-red-500 px-4 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-red-600"
+          >
             <MdOutlineDeleteForever /> Delete
           </button>
         </div>
@@ -99,7 +105,7 @@ const ListingsPetCard = ({ pet, petRequest }) => {
       />
       <DeleteModal
         isDelOpen={isDelOpen}
-        onClose={()=>setIsDelOpen(false)}
+        onClose={() => setIsDelOpen(false)}
         petName={name}
         onConfirm={handleDelete}
       />
