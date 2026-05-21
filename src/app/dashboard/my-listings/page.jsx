@@ -1,38 +1,23 @@
-"use client";
-
 import ListingsPetCard from "@/components/ListingsPetCard";
-import { useSession } from "@/lib/auth-client";
-import { useEffect, useState } from "react";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-const MyListingsPage = () => {
-  const [pets, setPets] = useState([]);
-  const { data } = useSession();
-  const user = data?.user;
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`http://localhost:8000/petsBy-userId/${user?.id}`);
-        const result = await response.json();
-        
-        setPets(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } 
-    };
-    fetchData();
-  }, [user?.id]);
-  const available=pets.filter(pet=>{
-    if(pet.status==="Available"){
-      return pet;
-    }
-  })
-  const adopted=pets.filter(pet=>{
-    if(pet.status==="adopted"){
-      return pet;
-    }
-  })
-  console.log(pets[0])
-  
+const MyListingsPage = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const user = session?.user;
+
+  const response = await fetch(
+    `http://localhost:8000/petsBy-userId/${user?.id}`,
+  );
+  const pets = await response.json();
+  const available = pets.filter((pet) => pet.status === "Available");
+  const adopted = pets.filter((pet) => pet.status === "adopted");
+  const requestPetRes = await fetch(`http://localhost:8000/request`);
+  const requestPets = await requestPetRes.json();
+
   return (
     <section>
       <div className="container mx-auto">
@@ -67,13 +52,17 @@ const MyListingsPage = () => {
               Available Pets
             </p>
 
-            <h2 className="mt-2 text-4xl font-bold text-[var(--success)]">{available.length}</h2>
+            <h2 className="mt-2 text-4xl font-bold text-[var(--success)]">
+              {available.length}
+            </h2>
           </div>
 
           <div className="glass-card p-6">
             <p className="text-sm text-[var(--text-secondary)]">Adopted Pets</p>
 
-            <h2 className="mt-2 text-4xl font-bold text-[#ff7a59]">{adopted.length}</h2>
+            <h2 className="mt-2 text-4xl font-bold text-[#ff7a59]">
+              {adopted.length}
+            </h2>
           </div>
         </div>
 
@@ -82,10 +71,25 @@ const MyListingsPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {/* CARD */}
 
-         {pets.length===0?<></>:<>
-          {pets.map(pet=><ListingsPetCard key={pet._id} pet={pet}></ListingsPetCard>)}
-         </>}
+          {pets.length === 0 ? (
+            <></>
+          ) : (
+            <>
+              {pets.map((pet) => {
+                const petRequest = requestPets.find(
+                  (req) => req.pet_id === pet._id,
+                );
 
+                return (
+                  <ListingsPetCard
+                    key={pet._id}
+                    pet={pet}
+                    petRequest={petRequest}
+                  />
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
     </section>
