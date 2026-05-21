@@ -19,15 +19,15 @@ export default function PerfectCompanion() {
 
             <div>
 
-              <div className="mb-4 inline-flex rounded-full bg-white/20 px-5 py-2 font-medium text-white backdrop-blur-xl">
+              <div className="mb-4 inline-flex rounded-full bg-white/20 px-5 py-2 font-medium text-primary backdrop-blur-xl">
                 🐾 Find Your Match
               </div>
 
-              <h2 className="text-4xl font-bold leading-tight text-white md:text-6xl">
+              <h2 className="text-4xl font-bold leading-tight text-primary md:text-6xl">
                 Every Pet Deserves a Loving Home
               </h2>
 
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80">
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
                 Explore adorable pets with different personalities and discover the perfect furry friend for your lifestyle.
               </p>
 

@@ -79,7 +79,7 @@ const Navbar = () => {
           {isPending ? (
             <div className="flex flex-col items-center">
               <Spinner color="success" size="lg" />
-              <span className="text-primary text-sm">Loading...</span>
+              <span className="text-primary text-sm">User...</span>
             </div>
           ) : user ? (
             <>
