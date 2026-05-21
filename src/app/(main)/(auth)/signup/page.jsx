@@ -55,11 +55,11 @@ const SignupPage = () => {
     }
   };
 
-  // const handleGoogleLogin = async () => {
-  //   const data = await authClient.signIn.social({
-  //     provider: "google",
-  //   });
-  // };
+  const handleGoogleLogin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
 
   return (
     <div
@@ -252,11 +252,10 @@ const SignupPage = () => {
               transition-all
               duration-300
               hover:-translate-y-1
-              hover:bg-[#fff1e6]
-              dark:hover:bg-[#243244]
               flex items-center justify-center gap-1.5
               cursor-pointer
             "
+            onClick={handleGoogleLogin}
               >
                 <FcGoogle size={22} />
                 Continue with Google

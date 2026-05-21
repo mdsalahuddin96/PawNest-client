@@ -4,17 +4,25 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ThemeSwitch from "@/components/ThemeSwitch";
-import logo from '@/assets/logo4.png'
+import logo from "@/assets/logo4.png";
 import { LuHeartHandshake } from "react-icons/lu";
 import { FaPlus } from "react-icons/fa";
 import { GiPawPrint } from "react-icons/gi";
+import { signOut, useSession } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+
 
 export default function DashboardLayout({ children }) {
   const [open, setOpen] = useState(false);
-
+  const { data, isPending } = useSession();
+  const user = data?.user;
+  const router=useRouter()
+  const handleLogout = async () => {
+    await signOut();
+    router.refresh();
+  };
   return (
     <div className="min-h-screen flex bg-[var(--background)] text-[var(--text-primary)]">
-
       {/* OVERLAY (mobile) */}
       {open && (
         <div
@@ -62,7 +70,7 @@ export default function DashboardLayout({ children }) {
             className="nav-link flex items-center gap-3"
             onClick={() => setOpen(false)}
           >
-            <LuHeartHandshake/> My Requests
+            <LuHeartHandshake /> My Requests
           </Link>
 
           <Link
@@ -70,7 +78,7 @@ export default function DashboardLayout({ children }) {
             className="nav-link flex items-center gap-3"
             onClick={() => setOpen(false)}
           >
-           <FaPlus /> Add Pet
+            <FaPlus /> Add Pet
           </Link>
 
           <Link
@@ -78,20 +86,17 @@ export default function DashboardLayout({ children }) {
             className="nav-link flex items-center gap-3"
             onClick={() => setOpen(false)}
           >
-            <GiPawPrint/> My Listings
+            <GiPawPrint /> My Listings
           </Link>
         </nav>
 
         {/* Bottom Profile */}
         <div className="p-4 border-t border-[var(--border-color)]">
-          <div className="glass-card p-3 flex items-center gap-3 profile">
-            <div className="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-white font-bold">
-              U
-            </div>
+          <div className="glass-card p-3 profile">
             <div>
-              <p className="text-sm font-semibold">User Name</p>
+              <p className="text-sm font-semibold">{user?.name}</p>
               <p className="text-xs text-[var(--text-secondary)]">
-                user@email.com
+                {user?.email}
               </p>
             </div>
           </div>
@@ -100,7 +105,6 @@ export default function DashboardLayout({ children }) {
 
       {/* MAIN */}
       <main className="flex-1 p-4 md:p-6 ">
-
         {/* TOP BAR */}
         <div className="flex items-center justify-between mb-8">
           {/* MOBILE MENU BUTTON */}
@@ -113,13 +117,14 @@ export default function DashboardLayout({ children }) {
           <h2 className="text-xl md:text-3xl font-bold heading-font">
             Dashboard
           </h2>
-          <ThemeSwitch />
+          <div className="flex items-center gap-5">
+            <ThemeSwitch />
+            <button className="btn-secondary" onClick={handleLogout}>Logout</button>
+          </div>
         </div>
 
         {/* CONTENT */}
-        <div className="space-y-6">
-          {children}
-        </div>
+        <div className="space-y-6">{children}</div>
       </main>
     </div>
   );

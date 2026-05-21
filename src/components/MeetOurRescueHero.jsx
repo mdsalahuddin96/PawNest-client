@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function MeetOurRescueHero() {
   return (
     <section className="section-padding">
@@ -26,9 +28,11 @@ export default function MeetOurRescueHero() {
           <div className="glass-card group overflow-hidden">
 
             <div className="overflow-hidden">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop"
                 alt="hero"
+                height={400}
+                width={400}
                 className="h-80 w-full object-cover transition-all duration-500 group-hover:scale-110"
               />
             </div>
@@ -56,9 +60,11 @@ export default function MeetOurRescueHero() {
           <div className="glass-card group overflow-hidden">
 
             <div className="overflow-hidden">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop"
                 alt="hero"
+                height={400}
+                width={400}
                 className="h-80 w-full object-cover transition-all duration-500 group-hover:scale-110"
               />
             </div>
@@ -86,9 +92,11 @@ export default function MeetOurRescueHero() {
           <div className="glass-card group overflow-hidden">
 
             <div className="overflow-hidden">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1200&auto=format&fit=crop"
                 alt="hero"
+                height={400}
+                width={400}
                 className="h-80 w-full object-cover transition-all duration-500 group-hover:scale-110"
               />
             </div>

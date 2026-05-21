@@ -136,13 +136,11 @@ const SigninPage = () => {
 
               <Button
               onClick={handleGoogleLogin}
-                variant="bordered"
-                className="h-12 rounded-full border border-[#ff7a59]/20 bg-[var(--surface)] font-medium text-[var(--text-primary)] backdrop-blur-xl
+              variant="bordered"
+              className="h-12 rounded-full border border-[#ff7a59]/20 bg-[var(--surface)] font-medium text-[var(--text-primary)] backdrop-blur-xl
               transition-all
               duration-300
               hover:-translate-y-1
-              hover:bg-[#fff1e6]
-              dark:hover:bg-[#243244]
               flex items-center justify-center gap-1.5
               cursor-pointer
             "

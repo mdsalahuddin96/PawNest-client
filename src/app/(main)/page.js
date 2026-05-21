@@ -1,6 +1,7 @@
 import Banner from "@/components/Banner";
 import FeaturedPets from "@/components/FeaturedPets";
 import MeetOurRescueHero from "@/components/MeetOurRescueHero";
+import PerfectCompanion from "@/components/PerfectCompanion";
 import PetCareTips from "@/components/PetCareTips";
 import SuccessStories from "@/components/SuccessStory";
 import WhyAdoptPets from "@/components/WhyAdopt";
@@ -17,6 +18,7 @@ export default async function Home() {
         <SuccessStories/>
         <PetCareTips/>
         <MeetOurRescueHero/>
+        <PerfectCompanion/>
       </div>
     </div>
   );
