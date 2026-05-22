@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🐾 PawNest - Pet Adoption Platform
 
-## Getting Started
+## 📌 Project Purpose
 
-First, run the development server:
+PawNest is a modern full-stack MERN-based Pet Adoption Platform where users can explore pets, submit adoption requests, manage their listings, and give rescued animals a loving forever home. The platform provides a smooth and responsive user experience with secure authentication and pet management features.
+
+---
+
+# 🌐 Live URL
+
+🔗 https://your-live-site-url.com
+
+---
+
+# ✨ Key Features
+
+* 🐶 Browse and search pets with filters by species and adoption fee
+* ❤️ Send adoption requests with pickup date and message
+* 📋 User dashboard for managing pet listings and adoption requests
+* 🔐 Secure authentication and protected API routes using token verification
+* 🌙 Fully responsive modern UI with Light & Dark mode support
+* 🐾 Add, update, and delete pet listings dynamically
+* 📱 Mobile, tablet, and desktop responsive design
+* ⚡ Beautiful loading states, modals, cards, and interactive UI components
+
+---
+
+# 🛠️ Technologies Used
+
+## Frontend
+
+* Next.js
+* React.js
+* Tailwind CSS
+* HeroUI
+* Next Themes
+* React Icons
+* React Toastify
+* Swiper.js
+
+## Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* JWT Authentication
+
+---
+
+# 📦 NPM Packages Used
+
+### Frontend Packages
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install next react react-dom
+npm install tailwindcss
+npm install next-themes
+npm install react-icons
+npm install react-toastify
+npm install swiper
+npm install @heroui/react
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Backend Packages
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npm install express mongodb cors dotenv jsonwebtoken
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 🚀 Future Improvements
 
-To learn more about Next.js, take a look at the following resources:
+* Online pet adoption payment integration
+* AI-based pet recommendation system
+* Real-time chat between adopter and owner
+* Admin dashboard for moderation
+* Wishlist / favorite pets feature
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
