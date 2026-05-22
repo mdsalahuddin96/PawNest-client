@@ -22,6 +22,7 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-separator py-2 navbar-blur ">
       <header className="flex h-16 items-center justify-between px-6 container mx-auto">
+        {/* Hamburger for mobile */}
         <div className="md:hidden flex items-center gap-4">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -52,6 +53,7 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
+
         {/* logo */}
         <Link href={"/"} className="cursor-pointer">
           <div className="flex gap-2 items-center">
@@ -67,6 +69,7 @@ const Navbar = () => {
             </h1>
           </div>
         </Link>
+
         {/* Navlinks */}
         <ul className="hidden items-center gap-4 md:flex">
           {navItems.map((item, ind) => (
@@ -74,7 +77,7 @@ const Navbar = () => {
           ))}
         </ul>
         {/* login & logout */}
-        <div className="flex items-center gap1.5 md:gap-3">
+        <div className="flex items-center gap-1.5 md:gap-3">
           <ThemeSwitch />
           {isPending ? (
             <div className="flex flex-col items-center">
@@ -99,6 +102,7 @@ const Navbar = () => {
           )}
         </div>
       </header>
+      {/* Mobile menu */}
       {isMenuOpen && (
         <div className="border-t border-separator md:hidden">
           <ul className="flex flex-col gap-2 p-4">

@@ -11,6 +11,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import DeleteModal from "@/components/DeleteModal";
+import { authClient } from "@/lib/auth-client";
 
 const ListingsPetCard = ({ pet, petRequest }) => {
   const { _id, image, name, status, breed, adoptionFee } = pet;
@@ -30,7 +31,9 @@ const ListingsPetCard = ({ pet, petRequest }) => {
     if (result.deletedCount > 0) {
       toast.error("Pet deleted!");
       router.refresh();
+      setIsDelOpen(false)
     }
+    
   };
   return (
     <div className="pet-card relative">

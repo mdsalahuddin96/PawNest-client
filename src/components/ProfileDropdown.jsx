@@ -1,6 +1,7 @@
 "use client";
 import { signOut } from "@/lib/auth-client";
 import { Avatar } from "@heroui/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -17,23 +18,26 @@ export default function ProfileDropdown({ user }) {
     <div>
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className=" profile  flex items-center gap-3 px-3 py-1 shadow-lg backdrop-blur-xl rounded-full ransition-all duration-300
+        className="  flex items-center gap-3 px-3 py-1 shadow-lg backdrop-blur-xl rounded-full ransition-all duration-300
             hover:scale-[1.02]
             hover:shadow-xl  
+            hover:bg-[linear-gradient(135deg,#ff7a59_0%,#ffb347_100%)]
           "
       >
-        <Avatar>
-          <Avatar.Image
-            alt={user?.name}
-            src={user?.image}
-            height={40}
-            width={40}
-            className="rounded-full"
-          />
-          <Avatar.Fallback>
-            {user?.name.charAt(0).toUpperCase()}
-          </Avatar.Fallback>
-        </Avatar>
+        <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-[var(--surface-soft)] shadow-sm">
+          {user?.image ? (
+            <Image
+              src={user.image}
+              alt="profile"
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <span className="flex h-full w-full items-center justify-center bg-[var(--gradient-primary)] text-lg font-bold text-primary">
+              {user?.name?.charAt(0)?.toUpperCase()}
+            </span>
+          )}
+        </div>
         <div className="hidden text-left sm:block">
           <h4 className="text-sm font-semibold text-[var(--text-primary)]">
             {`${user?.name.charAt(0).toUpperCase()}${user?.name.slice(1, 2).toLowerCase()}`}

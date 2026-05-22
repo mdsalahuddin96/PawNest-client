@@ -27,7 +27,6 @@ const FilterPets = () => {
     <section className="my-10">
       <div className="glass-card flex flex-col lg:flex-row gap-4 p-5 md:p-6">
         {/* SEARCH */}
-
         <div className="flex-1">
           <div className="flex items-center gap-3 h-14 px-5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface)] dark:bg-[var(--surface-soft)] transition-all focus-within:border-[#ff7a59] focus-within:shadow-[0_0_0_4px_rgba(255,122,89,0.15)]">
             <BiSearch size={18} className="text-[#ff7a59]" />
@@ -61,7 +60,7 @@ const FilterPets = () => {
 
         {/* FILTER BY FEE */}
 
-        <div className="w-full lg:w-64">
+        <div className="w-full lg:w-64 ">
           <select onChange={handleRange} className="w-full h-14 px-5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface)] dark:bg-[var(--surface-soft)] outline-none text-[var(--text-primary)] transition-all hover:border-[#ff7a59] focus:border-[#ff7a59] focus:shadow-[0_0_0_4px_rgba(255,122,89,0.15)]">
             <option value="">Filter by fee</option>
             <option value="under-50">Under $50</option>

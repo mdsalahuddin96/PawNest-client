@@ -14,7 +14,8 @@ const fredoka = Fredoka({
 });
 export const metadata = {
   title: "PawNest",
-  description: "PawNest is a modern pets adoption platform. where pet lovers can adopt pets and also post for give adoption",
+  description:
+    "PawNest is a modern pets adoption platform. where pet lovers can adopt pets and also post for give adoption",
 };
 
 export default function RootLayout({ children }) {
@@ -22,12 +23,10 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} h-full antialiased` }
+      className={`${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Providers>
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
         <ToastContainer />
       </body>
     </html>
