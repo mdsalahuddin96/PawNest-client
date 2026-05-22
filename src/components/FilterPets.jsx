@@ -55,6 +55,7 @@ const FilterPets = () => {
             <option value="dog">Dogs</option>
             <option value="cat">Cats</option>
             <option value="bird">Birds</option>
+            <option value="rabbits">Rabbits</option>
           </select>
         </div>
 

@@ -4,22 +4,14 @@ export default function PerfectCompanion() {
   return (
     <section className="section-padding">
       <div className="container-custom">
-
         <div className="relative overflow-hidden rounded-[40px] bg-[var(--gradient-primary)] px-6 py-16 md:px-14">
-
           {/* BG EFFECT */}
-
           <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-3xl"></div>
-
           <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-white/10 blur-3xl"></div>
-
           <div className="relative z-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-
             {/* LEFT */}
-
             <div>
-
-              <div className="mb-4 inline-flex rounded-full bg-white/20 px-5 py-2 font-medium text-primary backdrop-blur-xl">
+              <div className="mb-4 inline-flex rounded-full bg-white/30 px-5 py-2 font-medium text-primary backdrop-blur-xl">
                 🐾 Find Your Match
               </div>
 
@@ -33,11 +25,11 @@ export default function PerfectCompanion() {
 
               <div className="mt-8 flex flex-wrap gap-4">
 
-                <button className="rounded-2xl bg-white px-7 py-4 font-semibold text-[#ff7a59] transition-all duration-300 hover:-translate-y-1">
+                <button className="rounded-2xl border-[#ff7a59]/20 bg-white shadow-xl px-7 py-4 font-semibold text-[#ff7a59] transition-all duration-300 hover:-translate-y-1">
                   Explore Pets
                 </button>
 
-                <button className="rounded-2xl border border-white/30 bg-white/10 px-7 py-4 font-semibold text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/20">
+                <button className="rounded-2xl border border-white/30 bg-gray-500 shadow-xl px-7 py-4 font-semibold text-white backdrop-blur-xl ">
                   Learn More
                 </button>
 

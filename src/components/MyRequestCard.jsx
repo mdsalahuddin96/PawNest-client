@@ -63,8 +63,8 @@ const MyRequestCard = ({ request }) => {
       {/* ACTIONS */}
 
       <div className="mt-8 flex flex-col sm:flex-row gap-4">
-        <Link href={`/petDetails/${request.pet_id}`}>
-          <button className=" flex items-center gap-1.5 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-5 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
+        <Link href={`/petDetails/${request.pet_id}`} className="rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] px-5 py-3 font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[#ff7a59] hover:text-[#ff7a59]">
+          <button className=" flex items-center gap-1.5 ">
             <IoEyeSharp /> View Details
           </button>
         </Link>

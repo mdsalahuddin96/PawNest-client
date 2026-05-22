@@ -60,9 +60,9 @@ const Navbar = () => {
               alt="logo"
               height={50}
               width={50}
-              className="rounded-full"
+              className="rounded-full hidden md:block"
             />
-            <h1 className="gradient-text heading-font text-3xl font-semibold">
+            <h1 className="gradient-text heading-font text-2xl md:text-3xl font-semibold">
               PawNest
             </h1>
           </div>
@@ -74,7 +74,7 @@ const Navbar = () => {
           ))}
         </ul>
         {/* login & logout */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap1.5 md:gap-3">
           <ThemeSwitch />
           {isPending ? (
             <div className="flex flex-col items-center">

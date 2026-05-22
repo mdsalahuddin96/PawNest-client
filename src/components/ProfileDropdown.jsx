@@ -89,7 +89,7 @@ export default function ProfileDropdown({ user }) {
         </Link>
 
         <div
-          className="rounded-full px-3 py-2  text-red-500 transition-all duration-300 profile"
+          className="rounded-full px-3 py-2  text-red-500 transition-all duration-300 cursor-pointer profile"
           onClick={handleLogout}
         >
           Logout
