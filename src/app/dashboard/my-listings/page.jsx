@@ -84,7 +84,7 @@ const MyListingsPage = async () => {
             </div>
 
             <h2 className="heading-font text-3xl font-bold text-[var(--text-primary)]">
-              You haven’t listed any pets yet
+              You haven&apost listed any pets yet
             </h2>
           </div>
         ) : (

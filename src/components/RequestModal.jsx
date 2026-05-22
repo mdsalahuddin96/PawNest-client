@@ -8,6 +8,7 @@ import { CiCircleCheck } from "react-icons/ci";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 const RequestModal = ({ isOpen, onClose, request }) => {
   const [mounted, setMounted] = useState(false);
@@ -87,7 +88,7 @@ const RequestModal = ({ isOpen, onClose, request }) => {
 
           {/* Content Area */}
           <div className="mt-4 space-y-4 max-h-[60vh] overflow-y-auto pr-1">
-            <p className="text-sm text-[var(--text-secondary)]">
+            <p className="text-sm text-primary">
               Here are the recent adoption requests for:{" "}
               <span className="font-semibold text-[#ff7a59]">
                 {request.name}
@@ -95,17 +96,17 @@ const RequestModal = ({ isOpen, onClose, request }) => {
             </p>
 
             <div className="space-y-3">
-              <div className="p-3 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-soft)] text-sm">
+              <div className="p-3 rounded-2xl border border-[var(--border-color)] bg-[#fff1e6] text-sm">
                 <div className="flex justify-between font-semibold">
                   <span>{request.requester_name}</span>
                   <span className="text-yellow-500">
                     {request.requested_status}
                   </span>
                 </div>
-                <p className="text-xs text-[var(--text-secondary)] mt-1">
+                <p className="text-xs text-gray-500 mt-1">
                   Email: {request.requester_email}
                 </p>
-                <p className="text-xs text-[var(--text-secondary)] mt-1">
+                <p className="text-xs text-gray-500 mt-1">
                   Pickup Date: {request.pickup_date}
                 </p>
               </div>
@@ -115,16 +116,16 @@ const RequestModal = ({ isOpen, onClose, request }) => {
           {/* Footer */}
           <div className="mt-6 flex justify-end">
             {request.requested_status === "Pending" ? (
-              <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
                 <button
                   onClick={() => handleRequestStatus("Approved")}
-                  className="flex items-center  gap-1.5 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-400 px-2 py-1 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
+                  className="flex items-center cursor-pointer  gap-1.5 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-400 px-2 py-1 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
                 >
                   <CiCircleCheck /> Approve
                 </button>
                 <button
                   onClick={() => handleRequestStatus("Rejected")}
-                  className="flex items-center gap-1.5 rounded-2xl border border-red-400/30 bg-red-500/10 px-2 py-1 font-semibold text-red-500 backdrop-blur-xl transition-all duration-300  hover:bg-red-500 hover:text-white"
+                  className="cursor-pointer flex items-center gap-1.5 rounded-2xl border border-red-400/30 bg-red-500/10 px-2 py-1 font-semibold text-red-500 backdrop-blur-xl transition-all duration-300  hover:bg-red-500 hover:text-white"
                 >
                   <FaRegCircleXmark /> Reject
                 </button>
@@ -132,7 +133,7 @@ const RequestModal = ({ isOpen, onClose, request }) => {
             ) : (
               <button
                 onClick={onClose}
-                className="rounded-full bg-gray-100 dark:bg-gray-800 px-5 py-2.5 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                className="rounded-full bg-gray-100 dark:bg-gray-800 px-5 py-2.5 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors cursor-pointer"
               >
                 Close
               </button>
@@ -156,7 +157,7 @@ const RequestModal = ({ isOpen, onClose, request }) => {
 
           {/* Content Area */}
           <div className="mt-4 space-y-4 max-h-[60vh] overflow-y-auto pr-1">
-            <p className="text-sm text-[var(--text-secondary)]">
+            <p className="text-sm text-black">
               No one has requested to adopt this pet yet.{" "}
               <span className="font-semibold text-[#ff7a59]">🐾</span>
             </p>
