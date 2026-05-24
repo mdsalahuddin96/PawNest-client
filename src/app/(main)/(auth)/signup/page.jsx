@@ -12,11 +12,14 @@ import {
 } from "@heroui/react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { toast } from "react-toastify";
 const SignupPage = () => {
+  useEffect(() => {
+    document.title = "Signup - PawNest";
+  }, []);
   const [passwordValue, setPasswordValue] = useState("");
   const [confrimPassword, setConfirmPassword] = useState("");
   const [isShow, setIsShow] = useState(false);
@@ -255,7 +258,7 @@ const SignupPage = () => {
               flex items-center justify-center gap-1.5
               cursor-pointer
             "
-            onClick={handleGoogleLogin}
+                onClick={handleGoogleLogin}
               >
                 <FcGoogle size={22} />
                 Continue with Google

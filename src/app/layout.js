@@ -13,9 +13,8 @@ const fredoka = Fredoka({
   subsets: ["latin"],
 });
 export const metadata = {
-  title: "PawNest",
-  description:
-    "PawNest is a modern pets adoption platform. where pet lovers can adopt pets and also post for give adoption",
+  title: "Home | PawNest",
+  description:"PawNest is a modern pets adoption platform. where pet lovers can adopt pets and also post for give adoption",
 };
 
 export default function RootLayout({ children }) {

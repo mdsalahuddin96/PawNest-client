@@ -11,11 +11,15 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { toast } from "react-toastify";
 const SigninPage = () => {
+  useEffect(()=>{
+    document.title="Signin - PawNest"
+  },[])
+
   const [passwordValue, setPasswordValue] = useState("");
   const [isShow, setIsShow] = useState(false);
 

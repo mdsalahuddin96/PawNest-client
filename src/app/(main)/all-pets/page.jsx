@@ -2,7 +2,11 @@ import FilterPets from "@/components/FilterPets";
 import PetCard from "@/components/PetCard";
 import { getAllPets } from "@/service/getAllPets";
 // import { useSearchParams } from "next/navigation";
-
+export const metadata = {
+  title: "All Pets - PawNest",
+  description: "Learn more about PawNest pet adoption center.",
+  keywords: ["pet adoption", "adopt a dog", "cat adoption"],
+};
 const AllPetsPage = async ({ searchParams }) => {
   const { search, species, fee } = await searchParams;
   const pets = await getAllPets(search, species, fee);
@@ -30,8 +34,8 @@ const AllPetsPage = async ({ searchParams }) => {
           </h2>
 
           <p className="mt-3 max-w-md text-[var(--text-secondary)] leading-relaxed">
-            We couldn&apos;t find any pets matching your search or filter. Try using
-            different keywords or explore other adorable pets.
+            We couldn&apos;t find any pets matching your search or filter. Try
+            using different keywords or explore other adorable pets.
           </p>
         </div>
       ) : (

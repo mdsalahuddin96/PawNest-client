@@ -1,7 +1,10 @@
 import ListingsPetCard from "@/components/ListingsPetCard";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-
+export const metadata={
+  title:"My listings - PawNest",
+  description:"Here are all pets are shown which is added by the user"
+}
 const MyListingsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

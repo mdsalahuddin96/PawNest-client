@@ -3,12 +3,12 @@
 import { SubmitButton } from "@/components/SubmitBtn";
 import { authClient, useSession } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const AddPetPage = () => {
   const { data } = useSession();
   const user = data?.user;
-
   const onSubmit = async (formData) => {
     const petData = Object.fromEntries(formData.entries());
     if (petData?.vaccinated == "true") {
@@ -18,12 +18,12 @@ const AddPetPage = () => {
     }
     petData.status = "Available";
     petData.owner_id = user?.id;
-    const {data:tokenData}=await authClient.token()
+    const { data: tokenData } = await authClient.token();
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/add-pet`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        authorization:`Bearer ${tokenData?.token}`
+        authorization: `Bearer ${tokenData?.token}`,
       },
       body: JSON.stringify(petData),
     });
@@ -35,6 +35,9 @@ const AddPetPage = () => {
       toast.error("Something went wrong");
     }
   };
+  useEffect(() => {
+    document.title = "Add pet - Dashboard";
+  }, []);
   return (
     <section className="container mx-auto ">
       <div className="max-w-4xl mx-auto">

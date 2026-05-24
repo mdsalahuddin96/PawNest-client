@@ -1,6 +1,6 @@
-
 import AdoptPetForm from "@/components/AdoptPetForm";
 import { auth } from "@/lib/auth";
+import { getAllPets } from "@/service/getAllPets";
 import { getPetById } from "@/service/getPetById";
 import { Button } from "@heroui/react";
 import { headers } from "next/headers";
@@ -12,14 +12,31 @@ import { IoMdColorPalette } from "react-icons/io";
 import { LuMapPinCheckInside } from "react-icons/lu";
 import { MdOutlineHealthAndSafety } from "react-icons/md";
 import { TbVaccine } from "react-icons/tb";
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const pet = await getPetById(id, token);
+  return {
+    title: pet.name,
+    description: pet.description,
+  };
+}
 
+export async function generateStaticParams() {
+  const pets = await getAllPets();
+  return pets.map((pet) => ({
+    id: pet._id,
+  }));
+}
 const PetDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const {token}=await auth.api.getToken({
-    headers:await headers()
-  })
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
 
-  const pet = await getPetById(id,token);
+  const pet = await getPetById(id, token);
   const { user } = await auth.api.getSession({
     headers: await headers(),
   });
@@ -101,21 +118,27 @@ const PetDetailsPage = async ({ params }) => {
 
               {pet.health && (
                 <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
-                  <p className="text-sm text-muted flex items-center gap-1.5"><MdOutlineHealthAndSafety/>  Health</p>
+                  <p className="text-sm text-muted flex items-center gap-1.5">
+                    <MdOutlineHealthAndSafety /> Health
+                  </p>
                   <h4 className="mt-1 text-lg font-semibold">{pet?.health}</h4>
                 </div>
               )}
 
               {pet?.color && (
                 <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
-                  <p className="text-sm text-muted flex items-center gap-1.5"><IoMdColorPalette/>  Color</p>
+                  <p className="text-sm text-muted flex items-center gap-1.5">
+                    <IoMdColorPalette /> Color
+                  </p>
 
                   <h4 className="mt-1 text-lg font-semibold">{pet.color}</h4>
                 </div>
               )}
 
               <div className="bg-[var(--surface-soft)] rounded-2xl p-4">
-                <p className="text-sm text-muted flex items-center gap-1.5"><TbVaccine/> Vaccinated</p>
+                <p className="text-sm text-muted flex items-center gap-1.5">
+                  <TbVaccine /> Vaccinated
+                </p>
 
                 <h4 className="mt-1 text-lg font-semibold">
                   {pet?.vaccinated ? "Yes" : "No"}
@@ -123,7 +146,9 @@ const PetDetailsPage = async ({ params }) => {
               </div>
 
               <div className="bg-[var(--surface-soft)] rounded-2xl p-4 ">
-                <p className="text-sm text-muted flex items-center gap-1.5"><LuMapPinCheckInside/> Location</p>
+                <p className="text-sm text-muted flex items-center gap-1.5">
+                  <LuMapPinCheckInside /> Location
+                </p>
 
                 <h4 className="mt-1 text-lg font-semibold">{pet?.location}</h4>
               </div>
@@ -164,7 +189,7 @@ const PetDetailsPage = async ({ params }) => {
 
         {/* Right Section */}
         <div className="sticky top-24">
-         <AdoptPetForm user={user} pet={pet}/>
+          <AdoptPetForm user={user} pet={pet} />
         </div>
       </div>
     </section>

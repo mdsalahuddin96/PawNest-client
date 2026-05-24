@@ -11,6 +11,7 @@ const UpdatePet = () => {
   const user = data?.user;
   const { id } = useParams();
   useEffect(() => {
+    document.title="Update Pet-Dashboard"
     const fetchData = async () => {
       try {
         const { data: tokenData } = await authClient.token();
